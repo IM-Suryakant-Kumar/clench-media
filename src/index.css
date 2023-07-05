@@ -1,13 +1,105 @@
+:root {
+    --search-bg: #edf6f9;
+    --input-cl: #0d1b2a;
+    --icon-color: #124559;
+    --hover-icon-bg: #124559;
+    --hover-icon-cl: #ffffff;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+		"Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}
+
+/* Header */
+header {
+    padding: 0.2em 1em;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.logo-cont {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	text-decoration: none;
+    margin-right: auto;
+}
+
+.logo-cont > h2 {
+	color: #3a86ff;
+	border-bottom: 4px solid;
+}
+
+.search-box {
+	background-color: var(--search-bg);
+	display: flex;
+	align-items: center;
+	gap: 1em;
+}
+
+.search-box > input {
+	outline: none;
+	border: none;
+    padding-left: 1em;
+	background-color: var(--search-bg);
+    font-size: 0.825rem;
+    color: var(--input-cl);
+}
+
+.search-icon {
+    color: var(--icon-color);
+    padding: 0.4em 0.6em;
+}
+
+.search-icon:hover {
+    background-color: var(--hover-icon-bg);
+    color: var(--hover-icon-cl);
+}
+
+.profile-icon {
+    margin-left: 2em;
+}
+
+@media (max-width: 600px) {
+    nav {
+        flex-wrap: wrap;
+    }
+
+    .logo-cont {
+        order: 1;
+        gap: 0.9em;
+    }
+
+    .logo-cont > h2 {
+        font-size: 1.4rem;
+    }
+    
+    .search-box {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .profile {
+        order: 2;
+    }
+
+    .profile-icon {
+        margin-left: 1em;
+    }
 }
