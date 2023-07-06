@@ -17,7 +17,7 @@ const Signup = () => {
 
 	return (
 		<section className="centered-cont">
-			<div className="login-signup-cont">
+			<div className="signup-cont">
 				<h1>Sign up</h1>
 				<form>
 					<label htmlFor="name">Name</label>

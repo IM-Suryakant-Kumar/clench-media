@@ -23,7 +23,7 @@ const Login = () => {
 
 	return (
 		<section className="centered-cont">
-			<div className="login-signup-cont">
+			<div className="login-cont">
 				<h1>Sign in</h1>
 				<form>
 					<label htmlFor="email">Email</label>
