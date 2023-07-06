@@ -8,7 +8,7 @@ import {
 	MdOutlineWatchLater,
 	MdPlaylistAdd
 } from "react-icons/md";
-import "../styles/sideBar.css"
+import "../styles/sideBar.css";
 
 const SideBar = () => {
 	return (
