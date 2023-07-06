@@ -1,0 +1,59 @@
+.login-signup-cont {
+	background-color: var(--white-cl);
+	padding-top: 1em;
+	display: flex;
+	flex-direction: column;
+	border: 2px solid var(--search-bg);
+	border-radius: 0.4em;
+}
+
+.login-signup-cont > h1 {
+	color: var(--form-head-cl);
+	font-weight: 500;
+	text-align: center;
+}
+
+/* form */
+
+form {
+	padding: 0.5em 2em;
+}
+
+form > label,
+form > input,
+form > button {
+	width: 100%;
+	display: block;
+}
+
+form > input,
+form > button {
+	margin-bottom: 1em;
+}
+
+form > label {
+	color: var(--grey-cl);
+	font-size: 0.9rem;
+	margin-bottom: 0.2em;
+}
+
+form > input {
+	padding: 0.6em 1em;
+	outline: none;
+	border: none;
+	border: 1px solid var(--border-cl);
+	border-radius: 0.4em;
+}
+
+.login-btn {
+	background-color: var(--login-bg);
+}
+
+.guest-btn {
+	background-color: var(--guest-bg);
+}
+
+form > p {
+	text-align: center;
+	margin-top: 1.5em;
+}
