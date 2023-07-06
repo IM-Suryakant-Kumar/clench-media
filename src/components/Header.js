@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../images/logo.gif";
-import Profile from "../images/profile.png";
 import { MdSearch, MdAccountCircle } from "react-icons/md";
 
 const Header = () => {
