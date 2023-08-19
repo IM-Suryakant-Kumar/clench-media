@@ -1,39 +1,33 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "../styles/login.css"
+import { Link, Form, useSearchParams } from "react-router-dom";
+import "../styles/login.css";
+
+export async function action(obj) {
+    console.log(obj)    
+    return null
+}
 
 const Login = () => {
-	const [formData, setFormData] = useState({
-		email: "",
-		password: ""
-	});
-
-	const handleChange = (e) => {
-		let { name, value } = e.target;
-		setFormData((prevData) => ({ ...prevData, [name]: value }));
-	};
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	const handleGuestLogin = (e) => {
-		setFormData((prevData) => ({
-			...prevData,
-			email: "johndoe@gmail.com",
-			password: "johndoe123"
-		}));
+		setSearchParams({
+			email: "john@gmail.com",
+			password: 123456
+		});
 	};
 
 	return (
 		<section className="centered-cont">
 			<div className="login-cont">
 				<h1>Sign in</h1>
-				<form>
+				<Form method="post">
 					<label htmlFor="email">Email</label>
 					<input
 						type="email"
 						placeholder="johndoe@gmail.com"
 						id="email"
 						name="email"
-						value={formData.email}
-						onChange={handleChange}
 					/>
 					<label htmlFor="password">Password</label>
 					<input
@@ -41,10 +35,11 @@ const Login = () => {
 						placeholder="*********"
 						id="password"
 						name="password"
-						value={formData.password}
-						onChange={handleChange}
 					/>
-					<button type="submit" className="login-btn">
+					<button
+						type="submit"
+						className="login-btn"
+					>
 						Log in
 					</button>
 					<button
@@ -56,11 +51,14 @@ const Login = () => {
 					</button>
 					<p>
 						Don't have an account ?
-						<Link to="/signup" className="link">
+						<Link
+							to="/signup"
+							className="link"
+						>
 							Signup
 						</Link>
 					</p>
-				</form>
+				</Form>
 			</div>
 		</section>
 	);

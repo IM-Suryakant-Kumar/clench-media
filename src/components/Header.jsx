@@ -12,7 +12,7 @@ const Header = () => {
 					<img src={Logo} alt="Logo" />
 					<h2>ClenchMedia</h2>
 				</Link>
-				<Link to="/login" className="profile">
+				<Link to="/profile" className="profile">
 					<span className="profile-icon">
 						<MdAccountCircle size="2.4rem" />
 					</span>

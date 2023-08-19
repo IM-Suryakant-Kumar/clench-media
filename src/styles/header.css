@@ -1,6 +1,7 @@
 header {
 	padding: 0.2em 1em;
 	background-color: var(--white-cl);
+    user-select: none;
 }
 
 nav {
