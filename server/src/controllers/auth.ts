@@ -7,21 +7,17 @@ import bcrypt from "bcryptjs";
 
 // test
 export const test = async (req: Request, res: Response) => {
-    res.status(StatusCodes.OK).json({ message: "Hello world!" })
-}
+	res.status(StatusCodes.OK).json({ message: "Hello world!" });
+};
 
 // create user
 export const createUser = async (req: Request, res: Response): Promise<void> => {
 	const { name, email, password } = req.body;
 
-	if (!(name && email && password)) {
-		throw new BadRequestError("Please provide all values");
-	}
+	if (!(name && email && password)) throw new BadRequestError("Please provide all values");
 
 	const emailAlreadyExists = await User.findOne({ email });
-	if (emailAlreadyExists) {
-		throw new UnauthenticatedError("Email is already exists");
-	}
+	if (emailAlreadyExists) throw new UnauthenticatedError("Email is already exists");
 
 	const user = await User.create({ name, email, password });
 
@@ -32,20 +28,13 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
 export const login = async (req: Request, res: Response): Promise<void> => {
 	const { email, password } = req.body;
 
-    
-	if (!(email && password)) {
-		throw new BadRequestError("Please provide all values");
-	}
+	if (!(email && password)) throw new BadRequestError("Please provide all values");
 
 	const user = await User.findOne({ email });
-	if (!user) {
-		throw new UnauthenticatedError("Invalid credentials!");
-	}
+	if (!user) throw new UnauthenticatedError("Invalid credentials!");
 
 	const isPasswordCorrect = await bcrypt.compare(password, user.password);
-	if (!isPasswordCorrect) {
-		throw new UnauthenticatedError("Invalid credentials!");
-	}
+	if (!isPasswordCorrect) throw new UnauthenticatedError("Invalid credentials!");
 
 	sendToken(user, StatusCodes.OK, res);
 };
@@ -61,5 +50,9 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
 
 // get user
 export const getUser = async (req: Request, res: Response): Promise<void> => {
+	const newReq: any = req;
+
+	if (!newReq.user) throw new UnauthenticatedError("Authentication failed!");
     
-}
+	res.status(StatusCodes.OK).json({ success: true, user: newReq.user });
+};

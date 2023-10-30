@@ -7,6 +7,7 @@ import express, { Application } from "express";
 import { errorHandlerMiddleware, notFoundMiddleware } from "./middlewares";
 import connectDB from "./db";
 import authRouter from "./routes/auth";
+import cookieParser from "cookie-parser";
 
 config();
 const app: Application = express();
@@ -14,6 +15,7 @@ const app: Application = express();
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
 app.use(helmet());
 app.use(morgan("tiny"));
 app.use(

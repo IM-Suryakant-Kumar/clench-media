@@ -14,17 +14,15 @@ export const sendToken = (user: IUser, statusCode: number, res: Response) => {
 
 	const COOKIE_LIFETIME: number = Number(process.env.COOKIE_LIFETIME) || 5;
 
-    
-
 	res.status(statusCode)
 		.cookie("token", token, {
 			expires: new Date(Date.now() + COOKIE_LIFETIME * 24 * 60 * 60 * 1000),
 			secure: true,
 			httpOnly: true,
-			sameSite: "none",
+			// sameSite: "none",
 		})
 		.json({
 			success: true,
-			message: "logged in successfully"
+			message: "logged in successfully",
 		});
 };
