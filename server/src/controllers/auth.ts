@@ -39,6 +39,18 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 	sendToken(user, StatusCodes.OK, res);
 };
 
+// guest login
+export const guestLogin = async (req: Request, res: Response): Promise<void> => {
+
+	const user = await User.findOne({ email: "clench@gmail.com" });
+	if (!user) throw new UnauthenticatedError("Invalid credentials!");
+
+	const isPasswordCorrect = await bcrypt.compare("secret", user.password);
+	if (!isPasswordCorrect) throw new UnauthenticatedError("Invalid credentials!");
+
+	sendToken(user, StatusCodes.OK, res);
+};
+
 // logout user
 export const logout = async (req: Request, res: Response): Promise<void> => {
 	res.cookie("token", null, {
@@ -46,13 +58,4 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
 	});
 
 	res.status(StatusCodes.OK).json({ success: true, message: "Logged out successflly!" });
-};
-
-// get user
-export const getUser = async (req: Request, res: Response): Promise<void> => {
-	const newReq: any = req;
-
-	if (!newReq.user) throw new UnauthenticatedError("Authentication failed!");
-    
-	res.status(StatusCodes.OK).json({ success: true, user: newReq.user });
 };

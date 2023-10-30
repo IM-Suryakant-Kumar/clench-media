@@ -7,6 +7,7 @@ import express, { Application } from "express";
 import { errorHandlerMiddleware, notFoundMiddleware } from "./middlewares";
 import connectDB from "./db";
 import authRouter from "./routes/auth";
+import userRouter from "./routes/user";
 import cookieParser from "cookie-parser";
 
 config();
@@ -28,6 +29,7 @@ app.use(
 
 // Router
 app.use(authRouter);
+app.use(userRouter);
 
 // errorhandler
 app.use(notFoundMiddleware);
