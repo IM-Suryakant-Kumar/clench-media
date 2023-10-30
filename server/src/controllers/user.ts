@@ -7,6 +7,14 @@ export const getUser = async (req: Request, res: Response): Promise<void> => {
 	const newReq: any = req;
 
 	if (!newReq.user) throw new UnauthenticatedError("Authentication failed!");
-    
-	res.status(StatusCodes.OK).json({ success: true, user: newReq.user });
+
+	const { name, email } = newReq.user;
+
+	res.status(StatusCodes.OK).json({
+		success: true,
+		user: {
+			name,
+			email,
+		},
+	});
 };
