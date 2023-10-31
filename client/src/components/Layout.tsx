@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getLoggedInUser } from "../utils/api";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-import { Container, Wrapper } from "../styles/Layout.css";
+import { Container, Main } from "../styles/Layout.css";
 
 /* eslint-disable react-refresh/only-export-components */
 export const loader = async () => {
@@ -18,10 +18,10 @@ const Layout = () => {
 	return (
 		<Container>
 			<Navbar />
-			<Wrapper>
+			{/* <Main>
 				<Sidebar />
 				<Outlet />
-			</Wrapper>
+			</Main> */}
 			<ToastContainer
 				autoClose={1000}
 				pauseOnFocusLoss={false}

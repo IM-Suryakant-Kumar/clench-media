@@ -30,7 +30,7 @@
 	background-clip: content-box;
 }
 
-.link {
+a {
 	text-decoration: none;
 	color: inherit;
 }
