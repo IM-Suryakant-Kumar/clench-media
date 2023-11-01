@@ -7,15 +7,23 @@ import {
 	SearchForm,
 	Input,
 	Button,
-    LogCont,
+	LogCont,
+	Login,
 } from "../styles/Navbar.css";
 import LogoImg from "../assets/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { MdSearch, MdLogout, MdLogin } from "react-icons/md";
-// import { useMemo } from "react";
-// import { debounce } from "../utils/debounce";
+import { useMemo, useState } from "react";
+import { debounce } from "../utils/debounce";
+import { logout } from "../utils/api";
+import { User } from "../types/user";
 
-const Navbar = () => {
+type Props = {
+	user: User;
+};
+
+const Navbar: React.FC<Props> = ({ user }) => {
+	const [seacrhText, setSeacrhText] = useState<string>();
 	const navigate = useNavigate();
 
 	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +31,12 @@ const Navbar = () => {
 		navigate("/videos");
 	};
 
-	// const debounceChangeHandler = useMemo(() => debounce((e) => {}, 1000), )
+	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSeacrhText(e.target.value.toLowerCase());
+	};
+
+	/* eslint-disable react-hooks/exhaustive-deps */
+	const debounceChangeHandler = useMemo(() => debounce(changeHandler, 1000), [seacrhText]);
 
 	return (
 		<Header>
@@ -43,15 +56,21 @@ const Navbar = () => {
 					<Input
 						type="search"
 						placeholder="search"
-						// onChange={debounceChangeHandler}
+						onChange={debounceChangeHandler}
 					/>
-					<Button>
+					<Button type="submit">
 						<MdSearch size={"1rem"} />
 					</Button>
 				</SearchForm>
-                <LogCont>
-                    <MdLogout size={"1.5rem"} />
-                </LogCont>
+				{user ? (
+					<LogCont onClick={logout}>
+						<MdLogout size={"1.5rem"} />
+					</LogCont>
+				) : (
+					<Login onClick={() => navigate("/login")}>
+						<MdLogin size={"1.5rem"} />
+					</Login>
+				)}
 			</Right>
 		</Header>
 	);

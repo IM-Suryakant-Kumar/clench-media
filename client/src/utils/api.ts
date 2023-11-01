@@ -11,7 +11,8 @@ export const register = async (user: IRUser) => {
 		} = await axios.post("/register", user, config);
 		toast.success(message);
 	} catch (error) {
-		return console.log(error?.response.data.message);;
+		console.log(error?.response.data);
+		return error?.response.data;
 	}
 };
 
@@ -22,7 +23,8 @@ export const login = async (user: ILUser) => {
 		} = await axios.post("/login", user, config);
 		toast.success(message);
 	} catch (error) {
-		return console.log(error?.response.data.message);;
+		console.log(error?.response.data);
+		return error?.response.data;
 	}
 };
 
@@ -33,7 +35,8 @@ export const guestLogin = async () => {
 		} = await axios.get("/guest-login");
 		toast.success(message);
 	} catch (error) {
-		return console.log(error?.response.data.message);;
+		console.log(error?.response.data);
+		return error?.response.data;
 	}
 };
 
@@ -44,7 +47,8 @@ export const logout = async () => {
 		} = await axios.get("/logout");
 		toast.success(message);
 	} catch (error) {
-		return console.log(error?.response.data.message);;
+		console.log(error?.response.data);
+		return error?.response.data;
 	}
 };
 
@@ -55,6 +59,6 @@ export const getLoggedInUser = async () => {
 		} = await axios.get("/me");
 		return user;
 	} catch (error) {
-		return console.log(error?.response.data.message);
+		return error?.response.data;
 	}
 };

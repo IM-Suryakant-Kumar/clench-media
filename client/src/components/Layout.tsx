@@ -8,16 +8,16 @@ import { Container, Main } from "../styles/Layout.css";
 
 /* eslint-disable react-refresh/only-export-components */
 export const loader = async () => {
-	return (await getLoggedInUser()) || null;
+	const res = await getLoggedInUser();
+	return res.success ? res.user : null;
 };
 
 const Layout = () => {
-	const loaderData = useLoaderData();
-	console.log(loaderData);
+	const user = useLoaderData();
 
 	return (
 		<Container>
-			<Navbar />
+			<Navbar user={user} />
 			{/* <Main>
 				<Sidebar />
 				<Outlet />

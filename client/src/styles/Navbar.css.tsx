@@ -33,6 +33,11 @@ export const LogoText = styled.h1`
 export const Right = styled.div`
     display: flex;
     align-items: center;
+    & > :last-child {
+        color: var(--primary-color);
+        margin-left: 1.25em;
+        cursor: pointer;
+    }
 `;
 
 export const SearchForm = styled.form`
@@ -70,3 +75,4 @@ export const Button = styled.button`
 `;
 
 export const LogCont = styled.span``;
+export const Login = styled.span``;
