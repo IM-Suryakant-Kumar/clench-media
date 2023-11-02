@@ -27,6 +27,11 @@ export const Logo = styled.img`
 	margin-right: 0.3125em;
 	width: 30px;
 	height: 30px;
+
+    @media (min-width: 400px) {
+        width: 35px;
+        height: 35px;
+    }
 `;
 
 export const LogoText = styled.h1`

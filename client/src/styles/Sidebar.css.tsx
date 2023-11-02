@@ -28,6 +28,10 @@ export const Container = styled.aside`
 `;
 
 export const Text = styled.p`
-	font-size: 0.75rem;
+	font-size: 0.6rem;
 	margin-top: 0.75em;
+
+    @media (min-width: 400px) {
+        font-size: 0.875rem;
+    }
 `;
