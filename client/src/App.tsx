@@ -5,11 +5,12 @@ import {
 	Route,
 } from "react-router-dom";
 import Layout from "./components/Layout";
-import LoginSignup from "./pages/LoginSignup";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 // loaders
 import { loader as layoutLoader } from "./components/Layout";
 import { loader as homeLoader } from "./pages/Home";
+import Signup from "./pages/Signup";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -31,9 +32,29 @@ const router = createBrowserRouter(
                 path="video/:id"
                 element={<h1>Video details</h1>}
             />
+            <Route 
+                path="liked"
+                element={<h1>Liked</h1>}
+            />
+            <Route 
+                path="playlists"
+                element={<h1>playlist</h1>}
+            />
+            <Route 
+                path="watch-later"
+                element={<h1>watch later</h1>}
+            />
+            <Route 
+                path="history"
+                element={<h1>History</h1>}
+            />
 			<Route
 				path="/login"
-				element={<LoginSignup />}
+				element={<Login />}
+			/>
+			<Route
+				path="/signup"
+				element={<Signup />}
 			/>
             <Route path="*" element={<h3>404 - PAGE NOT FOUND!</h3>} />
 		</Route>,
