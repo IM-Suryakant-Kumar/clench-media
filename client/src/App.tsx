@@ -11,7 +11,7 @@ import Login from "./pages/Login";
 import { loader as layoutLoader } from "./components/Layout";
 import { loader as homeLoader } from "./pages/Home";
 import { loader as loginLoader } from "./pages/Login";
-import { loader as loginAction } from "./pages/Login";
+import { action as loginAction } from "./pages/Login";
 import Signup from "./pages/Signup";
 
 const router = createBrowserRouter(

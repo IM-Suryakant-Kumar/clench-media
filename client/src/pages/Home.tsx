@@ -17,7 +17,6 @@ const Home = () => {
             const { user } = await getLoggedInUser();
             setNewUser(user);
         })()
-        console.log("render")
     }, [])
 
 	return (

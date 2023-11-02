@@ -1,4 +1,5 @@
 import {
+    Form,
 	LoaderFunctionArgs,
 	redirect,
 	useActionData,
@@ -12,7 +13,6 @@ import {
 	GuestButton,
 	Input,
 	Message,
-	SForm,
 	Title,
 	Wrapper,
 } from "../styles/Login.css";
@@ -52,8 +52,9 @@ const Login = () => {
 	return (
 		<Container>
 			{/* <Wrapper> */}
-			<SForm
+			<Form
 				method="post"
+                className="login-form"
 				replace
 			>
 				<Title>Sign in</Title>
@@ -75,13 +76,13 @@ const Login = () => {
 				>
 					{navigation.state === "submitting" ? "Loggin in.." : "Log in"}
 				</Button>
-				<GuestButton
+				{/* <GuestButton
 					type="button"
 					onClick={handleGuestLogin}
 				>
 					Guest Login
-				</GuestButton>
-			</SForm>
+				</GuestButton> */}
+			</Form>
 			{/* </Wrapper> */}
 		</Container>
 	);
