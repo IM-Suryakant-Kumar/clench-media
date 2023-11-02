@@ -7,9 +7,11 @@ import {
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-// loaders
+// loaders and actions
 import { loader as layoutLoader } from "./components/Layout";
 import { loader as homeLoader } from "./pages/Home";
+import { loader as loginLoader } from "./pages/Login";
+import { loader as loginAction } from "./pages/Login";
 import Signup from "./pages/Signup";
 
 const router = createBrowserRouter(
@@ -51,6 +53,8 @@ const router = createBrowserRouter(
 			<Route
 				path="/login"
 				element={<Login />}
+                loader={loginLoader}
+                action={loginAction}
 			/>
 			<Route
 				path="/signup"

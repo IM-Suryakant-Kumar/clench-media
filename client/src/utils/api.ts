@@ -1,6 +1,7 @@
 import axios from "./axios";
 import { ILUser, IRUser } from "../types/user";
 import { toast } from "react-toastify";
+import { redirect } from "react-router-dom";
 
 const config = { headers: { Content_Type: "application/json" } };
 
@@ -34,6 +35,7 @@ export const guestLogin = async () => {
 			data: { message },
 		} = await axios.get("/guest-login");
 		toast.success(message);
+        redirect("/")
 	} catch (error) {
 		console.log(error?.response.data);
 		return error?.response.data;
@@ -46,6 +48,7 @@ export const logout = async () => {
 			data: { message },
 		} = await axios.get("/logout");
 		toast.success(message);
+        redirect("/")
 	} catch (error) {
 		console.log(error?.response.data);
 		return error?.response.data;
@@ -54,10 +57,7 @@ export const logout = async () => {
 
 export const getLoggedInUser = async () => {
 	try {
-		const {
-			data: { user },
-		} = await axios.get("/me");
-		return user;
+		return (await axios.get("/me")).data;
 	} catch (error) {
 		return error?.response.data;
 	}

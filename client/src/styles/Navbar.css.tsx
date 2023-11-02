@@ -32,15 +32,19 @@ export const Logo = styled.img`
         width: 35px;
         height: 35px;
     }
-`;
+
+    `;
 
 export const LogoText = styled.h1`
 	color: var(--primary-color);
 	font-size: 0.875rem;
 	font-weight: 600;
-
-    @media (min-width: 400px) {
-		font-size: medium;
+    
+    @media (min-width: 400px) and (max-width: 500px) {
+        font-size: medium;
+	}
+    @media (min-width: 501px) {
+        font-size: large;
 	}
 `;
 
@@ -94,4 +98,3 @@ export const Button = styled.button`
 `;
 
 export const LogCont = styled.span``;
-export const Login = styled.span``;

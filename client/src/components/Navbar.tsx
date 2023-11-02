@@ -8,7 +8,6 @@ import {
 	Input,
 	Button,
 	LogCont,
-	Login,
 } from "../styles/Navbar.css";
 import LogoImg from "../assets/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,9 +19,10 @@ import { User } from "../types/user";
 
 type Props = {
 	user: User;
+	setUser: React.Dispatch<React.SetStateAction<User>>;
 };
 
-const Navbar: React.FC<Props> = ({ user }) => {
+const Navbar: React.FC<Props> = ({ user, setUser }) => {
 	const [seacrhText, setSeacrhText] = useState<string>("");
 	const navigate = useNavigate();
 
@@ -37,6 +37,11 @@ const Navbar: React.FC<Props> = ({ user }) => {
 
 	/* eslint-disable react-hooks/exhaustive-deps */
 	const debounceChangeHandler = useMemo(() => debounce(changeHandler, 1000), [seacrhText]);
+
+	const handleLogout = async () => {
+		await logout();
+		setUser(null);
+	};
 
 	return (
 		<Header>
@@ -61,13 +66,13 @@ const Navbar: React.FC<Props> = ({ user }) => {
 					</Button>
 				</SearchForm>
 				{user ? (
-					<LogCont onClick={logout}>
+					<LogCont onClick={handleLogout}>
 						<MdLogout size={"1.5rem"} />
 					</LogCont>
 				) : (
-					<Login onClick={() => navigate("/login")}>
+					<LogCont onClick={() => navigate("/login")}>
 						<MdLogin size={"1.5rem"} />
-					</Login>
+					</LogCont>
 				)}
 			</Right>
 		</Header>

@@ -19,7 +19,7 @@ export const sendToken = (user: IUser, statusCode: number, res: Response) => {
 			expires: new Date(Date.now() + COOKIE_LIFETIME * 24 * 60 * 60 * 1000),
 			// secure: true,
 			httpOnly: true,
-			sameSite: "none",
+			// sameSite: "none",
 		})
 		.json({
 			success: true,
