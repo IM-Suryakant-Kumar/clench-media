@@ -23,6 +23,14 @@ const router = createBrowserRouter(
 				element={<Home />}
                 loader={homeLoader}
 			/>
+            <Route 
+                path="videos"
+                element={<h1>Videos</h1>}
+            />
+            <Route 
+                path="video/:id"
+                element={<h1>Video details</h1>}
+            />
 			<Route
 				path="/login"
 				element={<LoginSignup />}

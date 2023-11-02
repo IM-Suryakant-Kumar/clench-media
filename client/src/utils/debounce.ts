@@ -7,7 +7,6 @@ export const debounce = (fn: (...args: any[]) => void, delay: number) => {
 		if (timerID) clearTimeout(timerID);
 		const context: any = this;
 		const args: IArguments = arguments;
-		console.log(typeof context, typeof args);
 		timerID = setTimeout(() => fn.apply(context, args), delay);
 	};
 };
