@@ -2,17 +2,18 @@ import { styled } from "styled-components";
 import { media } from "./Responsive.css";
 
 export const Header = styled.header`
+    background-color: var(--white-cl);
 	height: 4rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 1.25em;
 
-	/* ${media.lg`
+	${media.lg`
         position: fixed;
         width: 100%;
         z-index: 3;
-    `} */
+    `}
 `;
 
 export const Left = styled.div`
@@ -41,8 +42,8 @@ export const Right = styled.div`
 `;
 
 export const SearchForm = styled.form`
-	width: 220px;
-	height: 35px;
+	width: 13.8rem;
+	height: 2.25rem;
 	background-color: var(--search-bg);
 	color: var(--grey-cl);
 	border-radius: 0.25em;
@@ -66,7 +67,7 @@ export const Input = styled.input`
 
 export const Button = styled.button`
 	height: 100%;
-    width: 35px;
+    width: 2.25rem;
 	color: var(--icon-color);
 	&:hover {
 		background-color: var(--hover-icon-bg);

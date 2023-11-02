@@ -27,6 +27,7 @@ const router = createBrowserRouter(
 				path="/login"
 				element={<LoginSignup />}
 			/>
+            <Route path="*" element={<h3>404 - PAGE NOT FOUND!</h3>} />
 		</Route>,
 	),
 );

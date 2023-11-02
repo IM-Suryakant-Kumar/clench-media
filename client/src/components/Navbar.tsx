@@ -13,7 +13,7 @@ import {
 import LogoImg from "../assets/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { MdSearch, MdLogout, MdLogin } from "react-icons/md";
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { debounce } from "../utils/debounce";
 import { logout } from "../utils/api";
 import { User } from "../types/user";
@@ -23,12 +23,12 @@ type Props = {
 };
 
 const Navbar: React.FC<Props> = ({ user }) => {
-	const [seacrhText, setSeacrhText] = useState<string>();
+	const [seacrhText, setSeacrhText] = useState<string>("");
 	const navigate = useNavigate();
 
 	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		navigate("/videos");
+		navigate(`/videos?searcText=${seacrhText}`);
 	};
 
 	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

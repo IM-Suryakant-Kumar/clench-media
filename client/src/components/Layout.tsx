@@ -18,10 +18,10 @@ const Layout = () => {
 	return (
 		<Container>
 			<Navbar user={user} />
-			{/* <Main>
+			<Main>
 				<Sidebar />
 				<Outlet />
-			</Main> */}
+			</Main>
 			<ToastContainer
 				autoClose={1000}
 				pauseOnFocusLoss={false}
