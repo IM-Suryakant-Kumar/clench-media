@@ -1,27 +1,33 @@
 import { styled } from "styled-components";
+import { media } from "./Responsive.css";
 
 export const Container = styled.aside`
 	background-color: var(--white-cl);
-    color: var(--side-icon-cl);
-	width: 9.5rem;
+	color: var(--side-icon-cl);
 	position: fixed;
-	top: 0;
 	left: 0;
+	right: 0;
 	bottom: 0;
-	padding-top: 4em;
 	display: flex;
-	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
-    & > * {
-        display: flex;
+	padding: 1em 0;
+	& > * {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	${media.lg`
+        width: 9rem;
+        top: 2em;
+        left: 0;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+    `}
 `;
 
 export const Text = styled.p`
-    font-size: 0.875rem;
-    margin-top: 0.625em;
-`
+	font-size: 0.75rem;
+	margin-top: 0.75em;
+`;

@@ -2,16 +2,18 @@ import { styled } from "styled-components";
 import { media } from "./Responsive.css";
 
 export const Header = styled.header`
-    background-color: var(--white-cl);
+	background-color: var(--white-cl);
+	width: 100%;
 	height: 4rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 1.25em;
+	gap: 0.625em;
+	padding: 0 0.25em;
 
 	${media.lg`
-        position: fixed;
         width: 100%;
+        position: fixed;
         z-index: 3;
     `}
 `;
@@ -22,28 +24,34 @@ export const Left = styled.div`
 `;
 
 export const Logo = styled.img`
-	margin-right: 0.625em;
+	margin-right: 0.3125em;
+	width: 30px;
+	height: 30px;
 `;
 
 export const LogoText = styled.h1`
 	color: var(--primary-color);
-	font-size: 1.25rem;
+	font-size: 0.875rem;
 	font-weight: 600;
+
+    @media (min-width: 400px) {
+		font-size: medium;
+	}
 `;
 
 export const Right = styled.div`
-    display: flex;
-    align-items: center;
-    & > :last-child {
-        color: var(--primary-color);
-        margin-left: 1.25em;
-        cursor: pointer;
-    }
+	display: flex;
+	align-items: center;
+	& > :last-child {
+		color: var(--primary-color);
+		margin-left: 0.3125em;
+		cursor: pointer;
+	}
 `;
 
 export const SearchForm = styled.form`
-	width: 13.8rem;
-	height: 2.25rem;
+	width: 7.5rem;
+	height: 2rem;
 	background-color: var(--search-bg);
 	color: var(--grey-cl);
 	border-radius: 0.25em;
@@ -55,19 +63,24 @@ export const SearchForm = styled.form`
 		outline: none;
 		background-color: var(--search-bg);
 	}
+    
+	@media (min-width: 400px) {
+		width: 100%;
+		width: 13.5rem;
+	}
 `;
 
 export const Input = styled.input`
+	width: calc(100% - 2rem);
 	color: var(--input-cl);
 	font-size: 0.875rem;
-    font-size: medium;
-    padding-left: 0.625em;
-    color: inherit;
+	padding-left: 0.3125em;
+	color: inherit;
 `;
 
 export const Button = styled.button`
 	height: 100%;
-    width: 2.25rem;
+	width: 2rem;
 	color: var(--icon-color);
 	&:hover {
 		background-color: var(--hover-icon-bg);

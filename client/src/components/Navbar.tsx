@@ -44,8 +44,6 @@ const Navbar: React.FC<Props> = ({ user }) => {
 				<Logo
 					src={LogoImg}
 					alt="logo"
-					width="35px"
-					height="35px"
 				/>
 				<Link to="/">
 					<LogoText>ClenchMedia</LogoText>
