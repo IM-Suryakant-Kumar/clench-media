@@ -1,23 +1,22 @@
 import { config } from "dotenv";
-import mongoose from "mongoose";
-import express, { Application } from "express";
+import connectDB from "./db";
 import Video from "./models/Video";
 import videos from "./videos";
-
 config()
 
-const app: Application = express()
+
 const url = process.env.MONGO_URL || "" 
 
 const start = async () => {
     try {
-        await mongoose.connect(url)
-        app.listen(4000, () => console.log(`Server is listening on Port 4000...`))
+        await connectDB(url)
         await Video.deleteMany()
         await Video.create(videos)
-        process.exit()
+        console.log("success!")
+        process.exit(0)
     } catch (error) {
         console.log(error)
+        process.exit(1)
     }
     
 }

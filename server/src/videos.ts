@@ -1,6 +1,6 @@
 const videos = [
 	{
-		_id: "BI1o2H9z9fo",
+		videoId: "BI1o2H9z9fo",
 		title: "Modern JavaScript From The Beginning | First 12 Hours",
 		description:
 			"This is the first 12 hours of my 37-hour JavaScript course. In thes video we will go over the fundamentals in-depth.",
@@ -11,7 +11,7 @@ const videos = [
 		published: "3 months ago",
 	},
 	{
-		_id: "PxNDgI8SD3U",
+		videoId: "PxNDgI8SD3U",
 		title: "Variables in JavaScript | JavaScript for Beginners (#4)",
 		description:
 			"In this video, you will learn what variables are in programming, how they work behind the scenes, and how to define a variable in JavaScript. ",
@@ -22,7 +22,7 @@ const videos = [
 		published: "18 hours ago",
 	},
 	{
-		_id: "r9I4DuGmJ2Y",
+		videoId: "r9I4DuGmJ2Y",
 		title: "Making a Game in JavaScript with No Experience",
 		description:
 			"What do Capybaras and JavaScript have in common? Well, this video! Today, I'll play the role of a full stack developer and create my first game in JavaScript with no experience.",
@@ -33,7 +33,7 @@ const videos = [
 		published: "4 days ago",
 	},
 	{
-		_id: "htznIeWKgg8",
+		videoId: "htznIeWKgg8",
 		title: "JavaScript Crash Course: Master the Basics in One Video! Ignite Your Front-End Mastery Series!",
 		description:
 			"Unleash your front-end development potential with our JavaScript Essentials crash course! In this action-packed series, you'll master the basics of JavaScript in one video.",
@@ -44,7 +44,7 @@ const videos = [
 		published: "4 months ago",
 	},
 	{
-		_id: "lkIFF4maKMU",
+		videoId: "lkIFF4maKMU",
 		title: "100+ JavaScript Concepts you Need to Know",
 		description:
 			"The ultimate 10 minute JavaScript course that quickly breaks down over 100 key concepts every web developer should know. Learn the basics of JS and start building apps on the web, mobile, desktop, and more.",
@@ -55,7 +55,7 @@ const videos = [
 		published: "11 months ago",
 	},
 	{
-		_id: "sscX432bMZo",
+		videoId: "sscX432bMZo",
 		title: "Javascript in 1 shot in Hindi",
 		description: "Javascript in 1 shot in Hindi | Chai aur Code",
 		creator: "Chai aur Code",
@@ -65,7 +65,7 @@ const videos = [
 		published: "2 months ago",
 	},
 	{
-		_id: "8dWL3wF_OMw",
+		videoId: "8dWL3wF_OMw",
 		title: "JavaScript Full Course for free 🌐",
 		description: "JavaScript tutorial for beginners full course",
 		creator: "Bro Code",
@@ -75,7 +75,7 @@ const videos = [
 		published: "6 months ago",
 	},
 	{
-		_id: "91btr-Gp-tI",
+		videoId: "91btr-Gp-tI",
 		title: "How to build Node.js + MongoDB with TypeScript",
 		description: "How to build Node.js + MongoDB with TypeScript",
 		creator: "Rui Wang",
@@ -85,7 +85,7 @@ const videos = [
 		published: "7 months ago",
 	},
 	{
-		_id: "lfm_Hu0hEms",
+		videoId: "lfm_Hu0hEms",
 		title: "Creating a Powerful E-Commerce Search and Filtering System with React",
 		description:
 			"In today's digital age, e-commerce websites are becoming increasingly popular, and customers demand more personalized experiences than ever before.",
@@ -96,7 +96,7 @@ const videos = [
 		published: "5 months ago",
 	},
 	{
-		_id: "02qV2icZahk",
+		videoId: "02qV2icZahk",
 		title: "Node & React Redux Tool Kit with Typescript",
 		description: "IMPORTANT! check frontend githug repo for better CSS for the GamePage",
 		creator: "Arturo Filio Villa",
@@ -106,7 +106,7 @@ const videos = [
 		published: "1 year ago",
 	},
 	{
-		_id: "WBPrJSw7yQA",
+		videoId: "WBPrJSw7yQA",
 		title: "Learn TypeScript in 50 Minutes - Tutorial for Beginners",
 		description:
 			"TypeScript is an open-source programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript, and adds optional static typing to the language.",
@@ -117,7 +117,7 @@ const videos = [
 		published: "5 years ago",
 	},
 	{
-		_id: "5ChkQKUzDCs",
+		videoId: "5ChkQKUzDCs",
 		title: "Big projects are ditching TypeScript… why?",
 		description:
 			"Why are some big open-source projects like Turbo and Svelte dropping TypeScript in favor of vanilla JavaScript? Learn about the pros and cons of TypeScript",
@@ -128,7 +128,7 @@ const videos = [
 		published: "1 months ago",
 	},
 	{
-		_id: "zQnBQ4tB3ZA",
+		videoId: "zQnBQ4tB3ZA",
 		title: "TypeScript in 100 Seconds?",
 		description:
 			"Learn the basics if TypeScript in 100 Seconds! If you love TS, upgrade to Fireship PRO for 40% off using code mbus5Kcj at ",
@@ -139,7 +139,7 @@ const videos = [
 		published: "2 years ago",
 	},
 	{
-		_id: "1jMJDbq7ZX4",
+		videoId: "1jMJDbq7ZX4",
 		title: "TypeScript Course In ReactJS - TypeScript",
 		description:
 			"In this video I will go over everything I thing a beginner should learn on how to use Typescript in React.",
@@ -150,7 +150,7 @@ const videos = [
 		published: "2 years ago",
 	},
 	{
-		_id: "W2BBskCCk8o",
+		videoId: "W2BBskCCk8o",
 		title: "My Problem with Using TypeScript in 2023",
 		description: "TypeScript should be easier!",
 		creator: "James Q Quick",
@@ -160,7 +160,7 @@ const videos = [
 		published: "9 days ago",
 	},
 	{
-		_id: "SqcY0GlETPk",
+		videoId: "SqcY0GlETPk",
 		title: "React Tutorial for Beginners",
 		description:
 			"React JS Tutorial for Beginners - Learn React 18 with TypeScript and build awesome frontend app!",
@@ -171,7 +171,7 @@ const videos = [
 		published: "7 months ago",
 	},
 	{
-		_id: "Rh3tobg7hEo",
+		videoId: "Rh3tobg7hEo",
 		title: "Learn React With This One Project",
 		description:
 			"Learning React is hard. There are so many concepts to learn and mindsets shifts that you need to do.",
@@ -182,7 +182,7 @@ const videos = [
 		published: "6 months ago",
 	},
 	{
-		_id: "pfV3fOyOG5Y",
+		videoId: "pfV3fOyOG5Y",
 		title: "React Roadmap for High Paying Jobs for Web developer in 2023 | Tanay Pratap Hindi",
 		description:
 			"In this video, discover advanced techniques to elevate your frontend React project and unlock high-paying web developer jobs in 2023.",
@@ -193,7 +193,7 @@ const videos = [
 		published: "3 months ago",
 	},
 	{
-		_id: "HxxN6AdEop0",
+		videoId: "HxxN6AdEop0",
 		title: "🚀 Mastering React/Next.js in 90 Minutes! Advanced Techniques👩‍💻",
 		description:
 			"In this 90-minute deep dive, we'll take your React/Next.js skills to the next level! Building upon the foundation we laid in our previous video",
@@ -204,7 +204,7 @@ const videos = [
 		published: "1 months ago",
 	},
 	{
-		_id: "qySZIzZvZOY",
+		videoId: "qySZIzZvZOY",
 		title: "React Hooks Tutorial - 27 - useMemo Hook",
 		description: "React Hooks Tutorial - 27 - useMemo Hook",
 		creator: "Codeevolution",
@@ -214,7 +214,7 @@ const videos = [
 		published: "4 months ago",
 	},
 	{
-		_id: "N4yUiQiTvwU",
+		videoId: "N4yUiQiTvwU",
 		title: "React Proxy | Easiest Fix to CORS Errors",
 		description:
 			"Proxying API Requests in Development using Vite, Parcel, or Create React App. If your plan is to host your react app from the same origin as your web server, then this is super helpful. Conveniently, this also avoids CORS issues.",

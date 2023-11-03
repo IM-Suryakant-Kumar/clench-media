@@ -1,7 +1,7 @@
 import { Document } from "mongoose";
 
 export interface IVideo extends Document {
-	_id: string;
+	videoId: string;
 	title: string;
 	description: string;
 	creator: string;

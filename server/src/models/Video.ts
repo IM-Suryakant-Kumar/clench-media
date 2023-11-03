@@ -1,8 +1,8 @@
-import { Schema, model, ObjectId } from "mongoose";
+import { Schema, model } from "mongoose";
 import { IVideo } from "../types/Video";
 
 const videoSchema: Schema = new Schema({
-	_id: { type: String, required: true, unique: true },
+	videoId: { type: String, required: true, unique: true },
 	title: { type: String, required: true },
 	description: { type: String, required: true },
 	creator: { type: String, required: true },
