@@ -1,27 +1,28 @@
-import { useEffect } from "react"
-import { LoaderFunctionArgs, useOutletContext } from "react-router-dom";
+import { useEffect } from "react";
+import { LoaderFunctionArgs, useLoaderData, useOutletContext } from "react-router-dom";
 import { Container, CatCont, FilterTitle } from "../styles/Home.css";
-import { getLoggedInUser } from "../utils/api";
+import { getAllVideos, getLoggedInUser } from "../utils/api";
 // import { NavLink } from "react-router-dom";
 
-export const loader = ({ request }: LoaderFunctionArgs) => {
-	return null;
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+	const data = await getAllVideos();
+	return data.success ? data.videos : null;
 };
 
 const Home = () => {
-    const [setNewUser] = useOutletContext();
-    
-    useEffect(() => {
-        (async () => {
-            const { user } = await getLoggedInUser();
-            setNewUser(user);
-            console.log("render")
-        })()
-    }, [])
+	const [setNewUser] = useOutletContext();
+	const videos = useLoaderData();
+	console.log(videos);
 
-	return (
-		<Container>Home</Container>
-	);
+	useEffect(() => {
+		(async () => {
+			const { user } = await getLoggedInUser();
+			setNewUser(user);
+			console.log("render");
+		})();
+	}, []);
+
+	return <Container>Home</Container>;
 };
 
 export default Home;

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 const config = { headers: { Content_Type: "application/json" } };
 
+// User API
 export const register = async (user: IRUser) => {
 	try {
 		const { data } = await axios.post("/register", user, config);
@@ -57,3 +58,14 @@ export const getLoggedInUser = async () => {
 		return error?.response.data;
 	}
 };
+
+// Videos API
+
+export const getAllVideos = async () => {
+    try {
+        const { data } = await axios.get("/videos")
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+}
