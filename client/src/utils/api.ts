@@ -1,17 +1,14 @@
 import axios from "./axios";
 import { ILUser, IRUser } from "../types/user";
 import { toast } from "react-toastify";
-import { redirect } from "react-router-dom";
 
 const config = { headers: { Content_Type: "application/json" } };
 
 export const register = async (user: IRUser) => {
 	try {
-		const {
-			data,
-		} = await axios.post("/register", user, config);
-		toast.success(data.message);
-        return data
+		const { data } = await axios.post("/register", user, config);
+		toast.success("Registered Successfully!");
+		return data;
 	} catch (error) {
 		console.log(error?.response.data);
 		return error?.response.data;
@@ -22,7 +19,7 @@ export const login = async (user: ILUser) => {
 	try {
 		const { data } = await axios.post("/login", user, config);
 		toast.success(data.message);
-        return data
+		return data;
 	} catch (error) {
 		console.log(error?.response.data);
 		return error?.response.data;
@@ -35,7 +32,6 @@ export const guestLogin = async () => {
 			data: { message },
 		} = await axios.get("/guest-login");
 		toast.success(message);
-		redirect("/");
 	} catch (error) {
 		console.log(error?.response.data);
 		return error?.response.data;
@@ -48,7 +44,6 @@ export const logout = async () => {
 			data: { message },
 		} = await axios.get("/logout");
 		toast.success(message);
-		redirect("/");
 	} catch (error) {
 		console.log(error?.response.data);
 		return error?.response.data;

@@ -6,6 +6,8 @@ import {
 	useLoaderData,
 	useNavigate,
 	useNavigation,
+	useOutletContext,
+	useSearchParams,
 } from "react-router-dom";
 import {
 	Button,
@@ -39,11 +41,17 @@ const Login = () => {
 	const message = useLoaderData();
 	const errorMessage = useActionData();
 	const navigation = useNavigation();
+	const [setUser] = useOutletContext();
+	const [searchParams, setSearchParams] = useSearchParams();
+	const pathname = searchParams.get("redirectTo") || "/";
+
 	const navigate = useNavigate();
 
 	const handleGuestLogin = async () => {
 		await guestLogin();
-		navigate("/", { replace: true });
+		const { user } = await getLoggedInUser();
+		setUser(user);
+		navigate(pathname);
 	};
 
 	return (
@@ -80,7 +88,7 @@ const Login = () => {
 				</GuestButton>
 
 				<SubTitle>
-					Don't have an account? <Link to="/signup">Signup</Link>
+					Don't have an account? <Link to={`/signup?redirectTo=${pathname}`}>Signup</Link>
 				</SubTitle>
 			</Form>
 		</Container>

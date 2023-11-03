@@ -4,9 +4,10 @@ import { IRUser } from "../types/user";
 import { Button, Container, Input, Message, SubTitle, Title } from "../styles/Signup.css";
 import { Link } from "react-router-dom";
 
-export const loader = async () => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const data = await getLoggedInUser();
-	return data.success ? redirect("/") : null;
+    const pathname = new URL(request.url).searchParams.get("redirectTo") || "/"
+	return data.success ? redirect(pathname) : null;
 };
 
 export const action = async ({ request }: LoaderFunctionArgs) => {
@@ -39,25 +40,25 @@ const Signup = () => {
 					type="name"
 					name="name"
 					placeholder="fullname"
-                    required
+					required
 				/>
 				<Input
 					type="email"
 					name="email"
 					placeholder="email"
-                    required
+					required
 				/>
 				<Input
 					type="password"
 					name="password"
 					placeholder="password"
-                    required
+					required
 				/>
 				<Input
 					type="text"
 					name="confpassword"
 					placeholder="confirm password"
-                    required
+					required
 				/>
 				<Button
 					type="submit"

@@ -7,7 +7,6 @@ import Sidebar from "./Sidebar";
 import { Container, Main } from "../styles/Layout.css";
 import { useState } from "react";
 
-/* eslint-disable react-refresh/only-export-components */
 export const loader = async () => {
 	const data = await getLoggedInUser();
 	return data.success ? data.user : null;

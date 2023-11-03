@@ -20,19 +20,19 @@ const Sidebar = () => {
 				<MdOutlineExplore size="1.5em" />
 				<Text>Explore</Text>
 			</NavLink>
-			<NavLink to="/liked">
+			<NavLink to="/host">
 				<MdOutlineThumbUp size="1.5em" />
 				<Text>Liked</Text>
 			</NavLink>
-			<NavLink to="/playlists">
+			<NavLink to="/host/playlists">
 				<MdPlaylistAdd size="1.5em" />
 				<Text>Playlist</Text>
 			</NavLink>
-			<NavLink to="/watchlater">
+			<NavLink to="/host/watchlater">
 				<MdOutlineWatchLater size="1.5em" />
 				<Text>Watch later</Text>
 			</NavLink>
-			<NavLink to="/history">
+			<NavLink to="/host/history">
 				<MdHistory size="1.5em" />
 				<Text>History</Text>
 			</NavLink>

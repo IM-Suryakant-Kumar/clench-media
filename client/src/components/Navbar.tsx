@@ -41,6 +41,7 @@ const Navbar: React.FC<Props> = ({ user, setUser }) => {
 	const handleLogout = async () => {
 		await logout();
 		setUser(null);
+		navigate("/");
 	};
 
 	return (
