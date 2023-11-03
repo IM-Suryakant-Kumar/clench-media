@@ -19,6 +19,9 @@ export const Container = styled.div`
 		align-items: center;
 		justify-content: center;
 		gap: 0.875em;
+        & > button {
+            cursor: pointer;
+        }
 	}
 `;
 

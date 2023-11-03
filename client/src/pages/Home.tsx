@@ -4,7 +4,6 @@ import { Container, CatCont, FilterTitle } from "../styles/Home.css";
 import { getLoggedInUser } from "../utils/api";
 // import { NavLink } from "react-router-dom";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const loader = ({ request }: LoaderFunctionArgs) => {
 	return null;
 };

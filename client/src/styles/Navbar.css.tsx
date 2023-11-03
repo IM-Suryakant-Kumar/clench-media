@@ -15,6 +15,7 @@ export const Header = styled.header`
         width: 100%;
         position: fixed;
         z-index: 3;
+        padding: 1em;
     `}
 `;
 

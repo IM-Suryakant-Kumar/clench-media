@@ -8,6 +8,7 @@ import { errorHandlerMiddleware, notFoundMiddleware } from "./middlewares";
 import connectDB from "./db";
 import authRouter from "./routes/auth";
 import userRouter from "./routes/user";
+import videoRouter from "./routes/video"
 import cookieParser from "cookie-parser";
 
 config();
@@ -30,6 +31,7 @@ app.use(
 // Router
 app.use(authRouter);
 app.use(userRouter);
+app.use(videoRouter);
 
 // errorhandler
 app.use(notFoundMiddleware);
