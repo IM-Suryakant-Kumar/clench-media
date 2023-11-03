@@ -12,6 +12,8 @@ import { loader as layoutLoader } from "./components/Layout";
 import { loader as homeLoader } from "./pages/Home";
 import { loader as loginLoader } from "./pages/Login";
 import { action as loginAction } from "./pages/Login";
+import { loader as signupLoader } from "./pages/Signup";
+import { action as signupAction } from "./pages/Signup";
 import Signup from "./pages/Signup";
 
 const router = createBrowserRouter(
@@ -55,10 +57,12 @@ const router = createBrowserRouter(
 				element={<Login />}
                 loader={loginLoader}
                 action={loginAction}
-			/>
+                />
 			<Route
 				path="/signup"
 				element={<Signup />}
+                loader={signupLoader}
+                action={signupAction}
 			/>
             <Route path="*" element={<h3>404 - PAGE NOT FOUND!</h3>} />
 		</Route>,

@@ -1,5 +1,5 @@
 import {
-    Form,
+	Form,
 	LoaderFunctionArgs,
 	redirect,
 	useActionData,
@@ -13,11 +13,12 @@ import {
 	GuestButton,
 	Input,
 	Message,
+	SubTitle,
 	Title,
-	Wrapper,
 } from "../styles/Login.css";
 import { getLoggedInUser, guestLogin, login } from "../utils/api";
 import { ILUser, User } from "../types/user";
+import { Link } from "react-router-dom";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const res = await getLoggedInUser();
@@ -30,12 +31,8 @@ export const action = async ({ request }: LoaderFunctionArgs) => {
 	const password = formData?.get("password");
 	const pathname = new URL(request.url).searchParams.get("redirectTo") || "/";
 
-	try {
-		await login({ email, password } as ILUser);
-		return redirect(pathname);
-	} catch (error) {
-		return error?.message;
-	}
+	const data = await login({ email, password } as ILUser);
+	return data.success ? redirect(pathname) : data.message;
 };
 
 const Login = () => {
@@ -51,15 +48,14 @@ const Login = () => {
 
 	return (
 		<Container>
-			{/* <Wrapper> */}
 			<Form
 				method="post"
-                className="login-form"
+				className="login-form"
 				replace
 			>
 				<Title>Sign in</Title>
-				{/* {message && <Message>{message}</Message>}
-                    {errorMessage && <Message>{errorMessage}</Message>} */}
+				{message ? <Message>{`${message}`}</Message> : ""}
+				{errorMessage ? <Message>{`${errorMessage}`}</Message> : ""}
 				<Input
 					type="email"
 					name="email"
@@ -76,14 +72,17 @@ const Login = () => {
 				>
 					{navigation.state === "submitting" ? "Loggin in.." : "Log in"}
 				</Button>
-				{/* <GuestButton
+				<GuestButton
 					type="button"
 					onClick={handleGuestLogin}
 				>
 					Guest Login
-				</GuestButton> */}
+				</GuestButton>
+
+				<SubTitle>
+					Don't have an account? <Link to="/signup">Signup</Link>
+				</SubTitle>
 			</Form>
-			{/* </Wrapper> */}
 		</Container>
 	);
 };

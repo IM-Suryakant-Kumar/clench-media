@@ -5,7 +5,7 @@ export const Container = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	& > .login-form {
+	& > .signup-form {
 		background-color: var(--secondary-cl);
 		width: 100%;
 		height: 100%;
@@ -13,7 +13,7 @@ export const Container = styled.div`
         padding: 1em 0;
 		border-radius: 0.3125em;
 		max-width: 280px;
-		max-height: 300px;
+		max-height: 350px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

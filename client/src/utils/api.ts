@@ -8,9 +8,10 @@ const config = { headers: { Content_Type: "application/json" } };
 export const register = async (user: IRUser) => {
 	try {
 		const {
-			data: { message },
+			data,
 		} = await axios.post("/register", user, config);
-		toast.success(message);
+		toast.success(data.message);
+        return data
 	} catch (error) {
 		console.log(error?.response.data);
 		return error?.response.data;
@@ -19,10 +20,9 @@ export const register = async (user: IRUser) => {
 
 export const login = async (user: ILUser) => {
 	try {
-		const {
-			data: { message },
-		} = await axios.post("/login", user, config);
-		toast.success(message);
+		const { data } = await axios.post("/login", user, config);
+		toast.success(data.message);
+        return data
 	} catch (error) {
 		console.log(error?.response.data);
 		return error?.response.data;
@@ -35,7 +35,7 @@ export const guestLogin = async () => {
 			data: { message },
 		} = await axios.get("/guest-login");
 		toast.success(message);
-        redirect("/")
+		redirect("/");
 	} catch (error) {
 		console.log(error?.response.data);
 		return error?.response.data;
@@ -48,7 +48,7 @@ export const logout = async () => {
 			data: { message },
 		} = await axios.get("/logout");
 		toast.success(message);
-        redirect("/")
+		redirect("/");
 	} catch (error) {
 		console.log(error?.response.data);
 		return error?.response.data;
