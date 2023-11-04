@@ -1,28 +1,38 @@
 import { useEffect } from "react";
-import { LoaderFunctionArgs, useLoaderData, useOutletContext } from "react-router-dom";
+import { useLoaderData, useOutletContext } from "react-router-dom";
 import { Container, CatCont, FilterTitle } from "../styles/Home.css";
 import { getAllVideos, getLoggedInUser } from "../utils/api";
-// import { NavLink } from "react-router-dom";
+import VideoCard from "../components/VideoCard";
+import IVideo from "../types/video";
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async () => {
 	const data = await getAllVideos();
 	return data.success ? data.videos : null;
 };
 
 const Home = () => {
-	const [setNewUser] = useOutletContext();
-	const videos = useLoaderData();
-	console.log(videos);
+	const [setNewUser]: [React.Dispatch<unknown>] = useOutletContext();
+	const videos: IVideo[] = useLoaderData();
+
+    console.log(videos)
 
 	useEffect(() => {
 		(async () => {
 			const { user } = await getLoggedInUser();
 			setNewUser(user);
-			console.log("render");
 		})();
 	}, []);
 
-	return <Container>Home</Container>;
+	return (
+		<Container>
+			{videos?.map((video, idx) => (
+				<VideoCard
+					key={idx}
+					video={video}
+				/>
+			))}
+		</Container>
+	);
 };
 
 export default Home;

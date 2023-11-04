@@ -35,7 +35,7 @@ const router = createBrowserRouter(
 				element={<h1>Videos</h1>}
 			/>
 			<Route
-				path="video/:id"
+				path="videos/:id"
 				element={<h1>Video details</h1>}
 			/>
 			<Route

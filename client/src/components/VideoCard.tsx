@@ -1,30 +1,37 @@
 import { Link } from "react-router-dom";
-import { IVideo } from "../pages/Home";
-import { Container, CardMedia, CardContent, Title } from "../styles/VideoCard.css";
+import {
+	Container,
+	CardMedia,
+	Title,
+	CardCont,
+	InfoCont,
+	Duration,
+	PlayButton,
+    CreatorName,
+} from "../styles/VideoCard.css";
+import IVideo from "../types/video";
 
 type Props = {
 	video: IVideo;
 };
 
-const VideoCard: React.FC<Props> = ({
-	video: {
-		id: { videoId },
-		snippet,
-	},
-}) => {
+const VideoCard: React.FC<Props> = ({ video: { videoId, title, duration, creator } }) => {
 	return (
 		<Container>
-			<Link to={`video/${videoId}`}>
-				<CardMedia
-					src={snippet?.thumbnails?.high?.url}
-					alt={snippet?.title}
-                    width="320px"
-                    height="180px"
-				/>
-			</Link>
-			<CardContent>
-                <Title>{snippet?.title.slice(0, 60)}</Title>
-            </CardContent>
+			<CardCont>
+				<Link to={`videos/${videoId}`}>
+					<CardMedia
+						src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
+						alt={title}
+					/>
+					<PlayButton />
+					<Duration>{duration}</Duration>
+				</Link>
+			</CardCont>
+			<InfoCont>
+				<Title>{title.slice(0, 60)}</Title>
+                <CreatorName>{creator}</CreatorName>
+			</InfoCont>
 		</Container>
 	);
 };
