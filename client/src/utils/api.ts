@@ -1,6 +1,7 @@
 import axios from "./axios";
 import { ILUser, IRUser } from "../types/user";
 import { toast } from "react-toastify";
+import { LoaderFunctionArgs } from "react-router-dom";
 
 const config = { headers: { Content_Type: "application/json" } };
 
@@ -62,10 +63,19 @@ export const getLoggedInUser = async () => {
 // Videos API
 
 export const getAllVideos = async () => {
-    try {
-        const { data } = await axios.get("/videos")
-        return data
-    } catch (error) {
-        return error.response.data
-    }
-}
+	try {
+		const { data } = await axios.get("/videos");
+		return data;
+	} catch (error) {
+		return error?.response.data;
+	}
+};
+
+export const getSingleVideo = async ({ params }: LoaderFunctionArgs) => {
+	try {
+		const { data } = await axios.get(`/videos/${params.id}`);
+		return data;
+	} catch (error) {
+		return error?.response.data;
+	}
+};

@@ -4,13 +4,18 @@ import { StatusCodes } from "http-status-codes";
 import { IVideo } from "../types/Video";
 
 export const addVideo = async (req: Request, res: Response) => {
-	const video = await Video.create(req.body);
-	res.status(StatusCodes.OK).json({ success: true, video });
+	const videos = await Video.create(req.body);
+	res.status(StatusCodes.OK).json({ success: true, videos });
 };
 
 export const getVideos = async (req: Request, res: Response) => {
 	const videos = await Video.find();
 	res.status(StatusCodes.OK).json({ success: true, videos });
+};
+
+export const getSingleVideo = async (req: Request, res: Response) => {
+	const video = (await Video.find({ videoId: req.params.id }))[0];
+	res.status(StatusCodes.OK).json({ success: true, video });
 };
 
 export const getCategories = async (req: Request, res: Response) => {

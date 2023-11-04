@@ -7,6 +7,9 @@ import {
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import HostLayout from "./components/HostLayout";
+import VideoDetails from "./pages/VideoDetails";
 // loaders and actions
 import { loader as layoutLoader } from "./components/Layout";
 import { loader as homeLoader } from "./pages/Home";
@@ -15,8 +18,7 @@ import { action as loginAction } from "./pages/Login";
 import { loader as signupLoader } from "./pages/Signup";
 import { action as signupAction } from "./pages/Signup";
 import { loader as hostLayoutLoader } from "./components/HostLayout";
-import Signup from "./pages/Signup";
-import HostLayout from "./components/HostLayout";
+import { loader as videoDetailsLoader } from "./pages/VideoDetails";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -36,7 +38,8 @@ const router = createBrowserRouter(
 			/>
 			<Route
 				path="videos/:id"
-				element={<h1>Video details</h1>}
+				element={<VideoDetails />}
+				loader={videoDetailsLoader}
 			/>
 			<Route
 				path="host"
