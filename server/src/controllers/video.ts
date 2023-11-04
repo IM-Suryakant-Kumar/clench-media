@@ -13,9 +13,11 @@ export const getVideos = async (req: Request, res: Response) => {
 	res.status(StatusCodes.OK).json({ success: true, videos });
 };
 
-export const getSingleVideo = async (req: Request, res: Response) => {
-	const video = (await Video.find({ videoId: req.params.id }))[0];
-	res.status(StatusCodes.OK).json({ success: true, video });
+export const getVideoDetails = async (req: Request, res: Response) => {
+	const videos = await Video.find();
+	const video = videos.find((video) => video.videoId === req.params.id);
+	const relatedVideos = videos.filter((item) => item.categoryName === video?.categoryName);
+	res.status(StatusCodes.OK).json({ success: true, videoDetails: { video, relatedVideos } });
 };
 
 export const getCategories = async (req: Request, res: Response) => {

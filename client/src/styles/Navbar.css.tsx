@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import { media } from "./Responsive.css";
 
 export const Header = styled.header`
 	background-color: var(--white-cl);
@@ -10,13 +9,11 @@ export const Header = styled.header`
 	justify-content: space-between;
 	gap: 0.625em;
 	padding: 0 0.25em;
-
-	${media.lg`
-        width: 100%;
-        position: fixed;
-        z-index: 3;
-        padding: 1em;
-    `}
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    padding: 1em;
 `;
 
 export const Left = styled.div`

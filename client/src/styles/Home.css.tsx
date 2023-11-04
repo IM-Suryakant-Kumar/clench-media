@@ -6,7 +6,7 @@ export const Container = styled.div`
 	justify-content: center;
 	flex-wrap: wrap;
 	gap: 1em;
-	padding: 1em 1em 5.5em 1em;
+	padding: 0.2em 0.2em 6em 0.2em;
 	& > * {
 		flex: 1 1 300px;
 	}

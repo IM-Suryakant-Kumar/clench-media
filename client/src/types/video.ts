@@ -1,5 +1,5 @@
 export default interface IVideo {
-    videoId: string;
+	videoId: string;
 	title: string;
 	description: string;
 	creator: string;
@@ -7,4 +7,9 @@ export default interface IVideo {
 	duration: string;
 	categoryName: string;
 	published: string;
+}
+
+export interface IVideoDetails {
+	video: IVideo;
+	relatedVideos: IVideo[];
 }

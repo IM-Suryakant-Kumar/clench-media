@@ -10,6 +10,7 @@ export const Container = styled.div`
 export const Main = styled.main`
 	height: 100%;
 	position: relative;
+    padding-top: 4em;
 
 	${media.lg`    
         &:nth-child(2) {
