@@ -14,8 +14,6 @@ const Home = () => {
 	const [setNewUser]: [React.Dispatch<unknown>] = useOutletContext();
 	const videos: IVideo[] = useLoaderData();
 
-    console.log(videos)
-
 	useEffect(() => {
 		(async () => {
 			const { user } = await getLoggedInUser();

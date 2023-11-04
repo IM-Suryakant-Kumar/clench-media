@@ -7,7 +7,10 @@ import {
 	InfoCont,
 	Duration,
 	PlayButton,
-    CreatorName,
+	CreatorName,
+	Views,
+	Time,
+	Dot,
 } from "../styles/VideoCard.css";
 import IVideo from "../types/video";
 
@@ -15,7 +18,9 @@ type Props = {
 	video: IVideo;
 };
 
-const VideoCard: React.FC<Props> = ({ video: { videoId, title, duration, creator } }) => {
+const VideoCard: React.FC<Props> = ({
+	video: { videoId, title, duration, creator, views, published },
+}) => {
 	return (
 		<Container>
 			<CardCont>
@@ -30,7 +35,10 @@ const VideoCard: React.FC<Props> = ({ video: { videoId, title, duration, creator
 			</CardCont>
 			<InfoCont>
 				<Title>{title.slice(0, 60)}</Title>
-                <CreatorName>{creator}</CreatorName>
+				<CreatorName>{creator}</CreatorName>
+				<Views>{views} views</Views>
+				<Time>{published}</Time>
+				<Dot />
 			</InfoCont>
 		</Container>
 	);
