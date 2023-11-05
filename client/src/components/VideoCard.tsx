@@ -24,7 +24,7 @@ const VideoCard: React.FC<Props> = ({
 	return (
 		<Container>
 			<CardCont>
-				<Link to={`videos/${videoId}`}>
+				<Link to={`/videos/${videoId}`}>
 					<CardMedia
 						src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
 						alt={title}
