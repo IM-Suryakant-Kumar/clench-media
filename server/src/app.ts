@@ -9,7 +9,13 @@ import connectDB from "./db";
 import authRouter from "./routes/auth";
 import userRouter from "./routes/user";
 import videoRouter from "./routes/video"
+import likeRouter from "./routes/like"
+import dislikeRouter from "./routes/dislike"
+import saveRouter from "./routes/save"
+import playlistRouter from "./routes/playlist"
+import historyRouter from "./routes/history"
 import cookieParser from "cookie-parser";
+import { authenticateUser } from "./middlewares/authentication";
 
 config();
 const app: Application = express();
@@ -32,6 +38,11 @@ app.use(
 app.use(authRouter);
 app.use(userRouter);
 app.use(videoRouter);
+app.use(authenticateUser, likeRouter);
+app.use(authenticateUser, dislikeRouter);
+app.use(authenticateUser, saveRouter);
+app.use(authenticateUser, playlistRouter);
+app.use(authenticateUser, historyRouter);
 
 // errorhandler
 app.use(notFoundMiddleware);
