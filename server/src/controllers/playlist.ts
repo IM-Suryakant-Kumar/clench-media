@@ -3,8 +3,9 @@ import Playlist from "../models/Playlist";
 import { StatusCodes } from "http-status-codes";
 
 export const addToPlaylist = async (req: Request, res: Response) => {
-	const { name, videoId } = req.body;
-	const user = req.user;
+    const newReq: any = req;
+	const { name, videoId } = newReq.body;
+	const user = newReq.user;
 	const playlist = await Playlist.findOne({ userId: user._id });
 
 	const restPlaylists = playlist?.playlists.filter((item) => item.name !== name) || [];
@@ -25,8 +26,9 @@ export const addToPlaylist = async (req: Request, res: Response) => {
 };
 
 export const removeFromPlaylist = async (req: Request, res: Response) => {
-	const { name, videoId } = req.body;
-	const user = req.user;
+    const newReq: any = req;
+	const { name, videoId } = newReq.body;
+	const user = newReq.user;
 	const playlist = await Playlist.findOne({ userId: user._id });
 
 	const restPlaylists = playlist?.playlists.filter((item) => item.name !== name) || [];

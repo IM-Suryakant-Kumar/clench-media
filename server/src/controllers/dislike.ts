@@ -3,7 +3,8 @@ import Dislike from "../models/Dislike";
 import { StatusCodes } from "http-status-codes";
 
 export const createDislike = async (req: Request, res: Response) => {
-	await Dislike.create({ userId: req.user._id, videoId: req.body.videoId });
+    const newReq: any = req;
+	await Dislike.create({ userId: newReq.user._id, videoId: req.body.videoId });
 	res.status(StatusCodes.CREATED).json({
 		success: true,
 		message: "Successfully dislike the video",
@@ -11,6 +12,7 @@ export const createDislike = async (req: Request, res: Response) => {
 };
 
 export const deleteDislike = async (req: Request, res: Response) => {
-    await Dislike.findOneAndDelete({ userId: req.user._id, videoId: req.params.videoId });
+    const newReq: any = req;
+    await Dislike.findOneAndDelete({ userId: newReq.user._id, videoId: req.params.videoId });
     res.status(StatusCodes.OK).json({ success: true, message: "Successfully removed dislike" })
 };
