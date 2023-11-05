@@ -12,4 +12,10 @@ export default interface IVideo {
 export interface IVideoDetails {
 	video: IVideo;
 	relatedVideos: IVideo[];
+	actions: {
+		isLiked: boolean;
+		isDisliked: boolean;
+		isSaved: boolean;
+		isInPlaylist: boolean;
+	};
 }

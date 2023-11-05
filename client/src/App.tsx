@@ -48,6 +48,10 @@ const router = createBrowserRouter(
 			>
 				<Route
 					index
+					element={<h1>host</h1>}
+				/>
+				<Route
+					path="like"
 					element={<h1>Liked</h1>}
 				/>
 				<Route
