@@ -1,14 +1,11 @@
 import { Router } from "express";
-import { addVideo, getCategories, getFilteredVideos, getSearchedVideos, getVideoDetails, getVideos } from "../controllers/video";
+import { addVideo, getCategories, getVideoDetails, getVideos } from "../controllers/video";
 import { authenticateUser } from "../middlewares/authentication";
 
 const router = Router();
 
-router.route("/add-video").post(authenticateUser, addVideo);
-router.route("/videos").get(getVideos);
+router.route("/videos").post(authenticateUser, addVideo).get(getVideos);
 router.route("/videos/:id").get(getVideoDetails);
 router.route("/categories").get(getCategories);
-router.route("/search").get(getSearchedVideos);
-router.route("/filter").get(getFilteredVideos);
 
 export default router;
