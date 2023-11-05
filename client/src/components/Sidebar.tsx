@@ -20,7 +20,7 @@ const Sidebar = () => {
 				<MdOutlineExplore size="1.5em" />
 				<Text>Explore</Text>
 			</NavLink>
-			<NavLink to="/host">
+			<NavLink to="/host/like">
 				<MdOutlineThumbUp size="1.5em" />
 				<Text>Liked</Text>
 			</NavLink>
