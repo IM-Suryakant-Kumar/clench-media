@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 import { IVideo } from "../types/Video";
 
-const videoSchema: Schema = new Schema({
+const VideoSchema: Schema = new Schema({
 	videoId: { type: String, required: true, unique: true },
 	title: { type: String, required: true },
 	description: { type: String, required: true },
@@ -12,4 +12,4 @@ const videoSchema: Schema = new Schema({
 	published: { type: String, required: true },
 });
 
-export default model<IVideo>("Video", videoSchema);
+export default model<IVideo>("Video", VideoSchema);

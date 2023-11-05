@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 import bcrypt from "bcryptjs";
 import { IUser } from "../types/User";
 
-const userSchema: Schema = new Schema(
+const UserSchema: Schema = new Schema(
 	{
 		name: { type: String, required: [true, "Please provide name!"] },
 		email: { type: String, required: [true, "Please provide email!"], unique: true },
@@ -17,4 +17,4 @@ userSchema.pre("save", async function () {
 	this.password = await bcrypt.hash(this.password, salt);
 });
 
-export default model<IUser>("User", userSchema);
+export default model<IUser>("User", UserSchema);
