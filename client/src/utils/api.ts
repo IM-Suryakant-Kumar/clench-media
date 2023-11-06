@@ -98,58 +98,77 @@ export const getVideoDetails = async ({ params }: LoaderFunctionArgs) => {
 
 // Like API
 export const createLike = async (videoId: string) => {
-    try {
-        const { data } = await axios.post("/like", { videoId }, config)
-        return data
-    } catch (error) {
-        return error.response.data
-    }
-}
+	try {
+		const { data } = await axios.post("/like", { videoId }, config);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
 
 export const deleteLike = async (videoId: string) => {
-    try {
-        const { data } = await axios.delete(`/like/${videoId}`)
-        return data
-    } catch (error) {
-        return error.response.data
-    }
-}
+	try {
+		const { data } = await axios.delete(`/like/${videoId}`);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
 export const createLike = async (videoId: string) => {
-    try {
-        const { data } = await axios.post("/like", { videoId }, config)
-        return data
-    } catch (error) {
-        return error.response.data
-    }
-}
+	try {
+		const { data } = await axios.post("/like", { videoId }, config);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
 
 export const deleteLike = async (videoId: string) => {
-    try {
-        const { data } = await axios.delete(`/like/${videoId}`)
-        return data
-    } catch (error) {
-        return error.response.data
-    }
-}
+	try {
+		const { data } = await axios.delete(`/like/${videoId}`);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
 
 // Dislike API
 export const createDislike = async (videoId: string) => {
-    try {
-        const { data } = await axios.post("/dislike", { videoId }, config)
-        return data
-    } catch (error) {
-        return error.response.data
-    }
-}
+	try {
+		const { data } = await axios.post("/dislike", { videoId }, config);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
 
 export const deleteDislike = async (videoId: string) => {
-    try {
-        const { data } = await axios.delete(`/dislike/${videoId}`)
-        return data
-    } catch (error) {
-        return error.response.data
-    }
-}
+	try {
+		const { data } = await axios.delete(`/dislike/${videoId}`);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
+
 // Save API
+export const AddToSave = async (videoId: string) => {
+	try {
+		const { data } = await axios.post("/save", { videoId }, config);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
+
+export const DeleteFromSave = async (videoId: string) => {
+	try {
+		const { data } = await axios.delete(`/save/${videoId}`);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
+
 // History API
 // PlayList API
