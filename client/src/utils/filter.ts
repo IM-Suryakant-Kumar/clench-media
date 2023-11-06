@@ -5,5 +5,5 @@ export const filterByCategory = (videos: IVideo[], cat: string) => {
 };
 
 export const filterBySearch = (videos: IVideo[], search: string) => {
-	return videos.filter((v) => v.title.includes(search));
+	return videos.filter((v) => v.title.toLowerCase().includes(search.toLowerCase()));
 };

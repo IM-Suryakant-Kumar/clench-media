@@ -70,9 +70,9 @@ export const getAllVideos = async ({ request }: LoaderFunctionArgs) => {
 		const cat: string = new URL(request.url).searchParams.get("cat") || "";
 		const search: string = new URL(request.url).searchParams.get("search") || "";
 		// filterBYcategory
-		data.videos = filterByCategory(data.videos, cat);
+		cat && (data.videos = filterByCategory(data.videos, cat));
 		// filterBySearch
-		data.videos = filterBySearch(data.videos, search);
+		search && (data.videos = filterBySearch(data.videos, search));
 		return data;
 	} catch (error) {
 		return error?.response.data;
