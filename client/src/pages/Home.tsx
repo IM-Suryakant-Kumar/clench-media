@@ -1,14 +1,18 @@
 import { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
-import { Container } from "../styles/Home.css";
-import { getLoggedInUser } from "../utils/api";
+import { useLoaderData, useOutletContext } from "react-router-dom";
+import { Card, CardCont, Container, InfoCont, Title } from "../styles/Home.css";
+import { getCategories, getLoggedInUser } from "../utils/api";
+import { Link } from "react-router-dom";
 
 export const loader = async () => {
-	return null;
+	const data = await getCategories();
+	return data.success ? data.categories : null;
 };
 
 const Home = () => {
 	const [setNewUser]: [React.Dispatch<unknown>] = useOutletContext();
+	const categories: string[] = useLoaderData();
+	console.log("render");
 
 	useEffect(() => {
 		(async () => {
@@ -19,7 +23,16 @@ const Home = () => {
 
 	return (
 		<Container>
-			Home
+			<InfoCont>
+				<Title>Step into the world of modern Devs</Title>
+			</InfoCont>
+			<CardCont>
+				{categories?.map((item, idx) => (
+					<Card key={idx}>
+						<Link to={`/host/videos?cat=${item}`}>{item}</Link>
+					</Card>
+				))}
+			</CardCont>
 		</Container>
 	);
 };

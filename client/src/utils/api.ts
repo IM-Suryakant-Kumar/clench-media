@@ -71,6 +71,14 @@ export const getAllVideos = async () => {
 	}
 };
 
+export const getCategories = async () => {
+	try {
+		return (await axios.get("/categories")).data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
+
 export const getSingleVideo = async ({ params }: LoaderFunctionArgs) => {
 	try {
 		const { data } = await axios.get(`/videos/${params.id}`);
