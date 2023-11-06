@@ -114,8 +114,42 @@ export const deleteLike = async (videoId: string) => {
         return error.response.data
     }
 }
+export const createLike = async (videoId: string) => {
+    try {
+        const { data } = await axios.post("/like", { videoId }, config)
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+}
+
+export const deleteLike = async (videoId: string) => {
+    try {
+        const { data } = await axios.delete(`/like/${videoId}`)
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+}
 
 // Dislike API
+export const createDislike = async (videoId: string) => {
+    try {
+        const { data } = await axios.post("/dislike", { videoId }, config)
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+}
+
+export const deleteDislike = async (videoId: string) => {
+    try {
+        const { data } = await axios.delete(`/dislike/${videoId}`)
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+}
 // Save API
 // History API
 // PlayList API
