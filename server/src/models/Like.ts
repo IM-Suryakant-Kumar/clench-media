@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import ILike from "../types/like";
+import ILike from "../types/Like";
 
 const LikeSchema: Schema = new Schema({
 	userId: { type: String, required: true },

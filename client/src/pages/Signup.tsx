@@ -37,7 +37,7 @@ export const action = async ({ request }: LoaderFunctionArgs) => {
 };
 
 const Signup = () => {
-	const errorMessage = useActionData();
+	const errorMessage = useActionData() as string;
 	const navigation = useNavigation();
 
 	return (
@@ -48,7 +48,7 @@ const Signup = () => {
 				replace
 			>
 				<Title>Sign up</Title>
-				{errorMessage ? <Message>{`${errorMessage}`}</Message> : ""}
+				{errorMessage && <Message>{`${errorMessage}`}</Message>}
 				<Input
 					type="name"
 					name="name"

@@ -10,11 +10,11 @@ export const Header = styled.header`
 	justify-content: space-between;
 	gap: 0.625em;
 	padding: 0 0.25em;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 3;
-    ${media.lg`
+	width: 100%;
+	position: fixed;
+	top: 0;
+	z-index: 3;
+	${media.lg`
         padding: 1em;
     `}
 `;
@@ -29,23 +29,22 @@ export const Logo = styled.img`
 	width: 30px;
 	height: 30px;
 
-    @media (min-width: 400px) {
-        width: 35px;
-        height: 35px;
-    }
-
-    `;
+	@media (min-width: 400px) {
+		width: 35px;
+		height: 35px;
+	}
+`;
 
 export const LogoText = styled.h1`
 	color: var(--primary-color);
 	font-size: 0.875rem;
 	font-weight: 600;
-    
-    @media (min-width: 400px) and (max-width: 500px) {
-        font-size: medium;
+
+	@media (min-width: 400px) and (max-width: 500px) {
+		font-size: medium;
 	}
-    @media (min-width: 501px) {
-        font-size: large;
+	@media (min-width: 501px) {
+		font-size: large;
 	}
 `;
 
@@ -73,7 +72,7 @@ export const SearchForm = styled.form`
 		outline: none;
 		background-color: var(--search-bg);
 	}
-    
+
 	@media (min-width: 400px) {
 		width: 100%;
 		width: 13.5rem;
@@ -82,7 +81,6 @@ export const SearchForm = styled.form`
 
 export const Input = styled.input`
 	width: calc(100% - 2rem);
-	color: var(--input-cl);
 	font-size: 0.875rem;
 	padding-left: 0.3125em;
 	color: inherit;

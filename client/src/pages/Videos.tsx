@@ -10,7 +10,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 const Videos = () => {
-	const videos: IVideo[] = useLoaderData();
+	const videos = useLoaderData() as IVideo[];
 
 	return (
 		<Container>

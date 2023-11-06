@@ -23,13 +23,13 @@ import { logout } from "../utils/api";
 import { User } from "../types/user";
 
 type Props = {
-	user: User;
-	setUser: React.Dispatch<React.SetStateAction<User>>;
+	user: User | null;
+	setUser: React.Dispatch<React.SetStateAction<User | null>>;
 };
 
 const Navbar: React.FC<Props> = ({ user, setUser }) => {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const searchText = searchParams.get("search");
+	const searchText = searchParams.get("search") as string;
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
 

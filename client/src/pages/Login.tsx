@@ -40,11 +40,12 @@ export const action = async ({ request }: LoaderFunctionArgs) => {
 };
 
 const Login = () => {
-	const message = useLoaderData();
-	const errorMessage = useActionData();
+	const message = useLoaderData() as string;
+	const errorMessage = useActionData() as string;
 	const navigation = useNavigation();
-	const [setUser] = useOutletContext();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [setUser]: React.Dispatch<React.SetStateAction<User | null>>[] =
+		useOutletContext();
+	const [searchParams] = useSearchParams();
 	const pathname = searchParams.get("redirectTo") || "/";
 
 	const navigate = useNavigate();
@@ -64,8 +65,8 @@ const Login = () => {
 				replace
 			>
 				<Title>Sign in</Title>
-				{message ? <Message>{`${message}`}</Message> : ""}
-				{errorMessage ? <Message>{`${errorMessage}`}</Message> : ""}
+				{message && <Message>{`${message}`}</Message>}
+				{errorMessage && <Message>{`${errorMessage}`}</Message>}
 				<Input
 					type="email"
 					name="email"
