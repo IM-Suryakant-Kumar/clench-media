@@ -10,7 +10,12 @@ import {
 	LogCont,
 } from "../styles/Navbar.css";
 import LogoImg from "../assets/logo.svg";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+	Link,
+	useLocation,
+	useNavigate,
+	useSearchParams,
+} from "react-router-dom";
 import { MdSearch, MdLogout, MdLogin } from "react-icons/md";
 import React, { useMemo } from "react";
 import { debounce } from "../utils/debounce";
@@ -42,14 +47,19 @@ const Navbar: React.FC<Props> = ({ user, setUser }) => {
 			navigate(newPathname);
 		} else {
 			setSearchParams((prevParams) => {
-				value ? prevParams.set("search", value) : prevParams.delete("search");
+				value
+					? prevParams.set("search", value)
+					: prevParams.delete("search");
 				return prevParams;
 			});
 		}
 	};
 
 	/* eslint-disable react-hooks/exhaustive-deps */
-	const debounceChangeHandler = useMemo(() => debounce(changeHandler, 1000), [searchText]);
+	const debounceChangeHandler = useMemo(
+		() => debounce(changeHandler, 1000),
+		[searchText],
+	);
 
 	const handleLogout = async () => {
 		await logout();

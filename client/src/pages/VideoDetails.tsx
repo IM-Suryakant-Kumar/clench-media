@@ -34,10 +34,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 const VideoDetails = () => {
-	const videoDetails: IVideoDetails = useLoaderData() as Pick<
-		IVideoDetails,
-		"actions" | "video" | "relatedVideos"
-	>;
+	const videoDetails: IVideoDetails = useLoaderData() as IVideoDetails;
 	const videoId = useParams().id as string;
 
 	const [actions, setActions] = useState<IActions>({

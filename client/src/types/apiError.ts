@@ -1,8 +1,9 @@
-export declare type ApiError = {
+export default interface IApiError {
 	message: string;
 	response: {
 		data: {
+			success: boolean;
 			message: string;
 		};
 	};
-};
+}

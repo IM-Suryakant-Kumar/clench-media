@@ -24,7 +24,9 @@ import { Link } from "react-router-dom";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const res = await getLoggedInUser();
-	return res.success ? redirect("/") : new URL(request.url).searchParams.get("message");
+	return res.success
+		? redirect("/")
+		: new URL(request.url).searchParams.get("message");
 };
 
 export const action = async ({ request }: LoaderFunctionArgs) => {
@@ -78,7 +80,9 @@ const Login = () => {
 					type="submit"
 					disabled={navigation.state === "submitting"}
 				>
-					{navigation.state === "submitting" ? "Loggin in.." : "Log in"}
+					{navigation.state === "submitting"
+						? "Loggin in.."
+						: "Log in"}
 				</Button>
 				<GuestButton
 					type="button"
@@ -88,7 +92,8 @@ const Login = () => {
 				</GuestButton>
 
 				<SubTitle>
-					Don't have an account? <Link to={`/signup?redirectTo=${pathname}`}>Signup</Link>
+					Don't have an account?{" "}
+					<Link to={`/signup?redirectTo=${pathname}`}>Signup</Link>
 				</SubTitle>
 			</Form>
 		</Container>

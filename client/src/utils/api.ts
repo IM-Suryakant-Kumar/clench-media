@@ -3,6 +3,7 @@ import { ILUser, IRUser } from "../types/user";
 import { toast } from "react-toastify";
 import { LoaderFunctionArgs } from "react-router-dom";
 import { filterByCategory, filterBySearch } from "./filter";
+import IApiError from "../types/apiError";
 
 const config = { headers: { Content_Type: "application/json" } };
 
@@ -13,8 +14,9 @@ export const register = async (user: IRUser) => {
 		toast.success("Registered Successfully!");
 		return data;
 	} catch (error) {
-		console.log(error?.response.data);
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -24,8 +26,9 @@ export const login = async (user: ILUser) => {
 		toast.success(data.message);
 		return data;
 	} catch (error) {
-		console.log(error?.response.data);
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -36,8 +39,9 @@ export const guestLogin = async () => {
 		} = await axios.get("/guest-login");
 		toast.success(message);
 	} catch (error) {
-		console.log(error?.response.data);
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -48,8 +52,9 @@ export const logout = async () => {
 		} = await axios.get("/logout");
 		toast.success(message);
 	} catch (error) {
-		console.log(error?.response.data);
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -57,8 +62,9 @@ export const getLoggedInUser = async () => {
 	try {
 		return (await axios.get("/me")).data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -68,15 +74,17 @@ export const getAllVideos = async ({ request }: LoaderFunctionArgs) => {
 	try {
 		const { data } = await axios.get("/videos");
 		const cat: string = new URL(request.url).searchParams.get("cat") || "";
-		const search: string = new URL(request.url).searchParams.get("search") || "";
+		const search: string =
+			new URL(request.url).searchParams.get("search") || "";
 		// filterBYcategory
 		cat && (data.videos = filterByCategory(data.videos, cat));
 		// filterBySearch
 		search && (data.videos = filterBySearch(data.videos, search));
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -84,8 +92,9 @@ export const getCategories = async () => {
 	try {
 		return (await axios.get("/categories")).data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -94,8 +103,9 @@ export const getVideoDetails = async ({ params }: LoaderFunctionArgs) => {
 		const { data } = await axios.get(`/videos/${params.id}`);
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -105,8 +115,9 @@ export const createLike = async (videoId: string) => {
 		const { data } = await axios.post("/like", { videoId }, config);
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -115,8 +126,9 @@ export const deleteLike = async (videoId: string) => {
 		const { data } = await axios.delete(`/like/${videoId}`);
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -126,8 +138,9 @@ export const createDislike = async (videoId: string) => {
 		const { data } = await axios.post("/dislike", { videoId }, config);
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -136,8 +149,9 @@ export const deleteDislike = async (videoId: string) => {
 		const { data } = await axios.delete(`/dislike/${videoId}`);
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -147,8 +161,9 @@ export const addToSave = async (videoId: string) => {
 		const { data } = await axios.post("/save", { videoId }, config);
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -157,8 +172,9 @@ export const deleteFromSave = async (videoId: string) => {
 		const { data } = await axios.delete(`/save/${videoId}`);
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -168,8 +184,9 @@ export const AddToHistory = async (videoId: string) => {
 		const { data } = await axios.post("/history", { videoId }, config);
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
@@ -178,28 +195,39 @@ export const DeleteFromHistory = async (videoId: string) => {
 		const { data } = await axios.delete(`/history/${videoId}`);
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
 // PlayList API
 export const AddToPlaylist = async (name: string, videoId: string) => {
 	try {
-		const { data } = await axios.post("/playlist", { name, videoId }, config);
+		const { data } = await axios.post(
+			"/playlist",
+			{ name, videoId },
+			config,
+		);
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };
 
 export const DeleteFromPlaylist = async (name: string, videoId: string) => {
 	try {
-		const { data } = await axios.put(`/playlist`, { name, videoId }, config);
+		const { data } = await axios.put(
+			`/playlist`,
+			{ name, videoId },
+			config,
+		);
 		return data;
 	} catch (error) {
-        console.log(error?.response.data)
-		return error?.response.data;
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
 	}
 };

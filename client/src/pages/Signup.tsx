@@ -1,12 +1,25 @@
-import { Form, LoaderFunctionArgs, redirect, useActionData, useNavigation } from "react-router-dom";
+import {
+	Form,
+	LoaderFunctionArgs,
+	redirect,
+	useActionData,
+	useNavigation,
+} from "react-router-dom";
 import { getLoggedInUser, register } from "../utils/api";
 import { IRUser } from "../types/user";
-import { Button, Container, Input, Message, SubTitle, Title } from "../styles/Signup.css";
+import {
+	Button,
+	Container,
+	Input,
+	Message,
+	SubTitle,
+	Title,
+} from "../styles/Signup.css";
 import { Link } from "react-router-dom";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const data = await getLoggedInUser();
-    const pathname = new URL(request.url).searchParams.get("redirectTo") || "/"
+	const pathname = new URL(request.url).searchParams.get("redirectTo") || "/";
 	return data.success ? redirect(pathname) : null;
 };
 
@@ -64,7 +77,9 @@ const Signup = () => {
 					type="submit"
 					disabled={navigation.state === "submitting"}
 				>
-					{navigation.state === "submitting" ? "Signing up.." : "Sign up"}
+					{navigation.state === "submitting"
+						? "Signing up.."
+						: "Sign up"}
 				</Button>
 				<SubTitle>
 					already have an account? <Link to="/login">Login</Link>
