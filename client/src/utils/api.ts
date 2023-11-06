@@ -188,4 +188,22 @@ export const DeleteFromHistory = async (videoId: string) => {
 		return error.response.data;
 	}
 };
+
 // PlayList API
+export const AddToPlaylist = async (name: string, videoId: string) => {
+	try {
+		const { data } = await axios.post("/playlist", { name, videoId }, config);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
+
+export const DeleteFromPlaylist = async (name: string, videoId: string) => {
+	try {
+		const { data } = await axios.put(`/playlist`, { name, videoId }, config);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
