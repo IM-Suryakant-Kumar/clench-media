@@ -2,6 +2,8 @@ import axios from "./axios";
 import { ILUser, IRUser } from "../types/user";
 import { toast } from "react-toastify";
 import { LoaderFunctionArgs } from "react-router-dom";
+import IVideo from "../types/video";
+import { filterByCategory, filterBySearch } from "./filter";
 
 const config = { headers: { Content_Type: "application/json" } };
 
@@ -62,9 +64,15 @@ export const getLoggedInUser = async () => {
 
 // Videos API
 
-export const getAllVideos = async () => {
+export const getAllVideos = async ({ request }: LoaderFunctionArgs) => {
 	try {
 		const { data } = await axios.get("/videos");
+		const cat: string = new URL(request.url).searchParams.get("cat") || "";
+		const search: string = new URL(request.url).searchParams.get("search") || "";
+		// filterBYcategory
+		data.videos = filterByCategory(data.videos, cat);
+		// filterBySearch
+		data.videos = filterBySearch(data.videos, search);
 		return data;
 	} catch (error) {
 		return error?.response.data;
@@ -79,7 +87,7 @@ export const getCategories = async () => {
 	}
 };
 
-export const getSingleVideo = async ({ params }: LoaderFunctionArgs) => {
+export const getVideoDetails = async ({ params }: LoaderFunctionArgs) => {
 	try {
 		const { data } = await axios.get(`/videos/${params.id}`);
 		return data;

@@ -1,6 +1,6 @@
 import { Suspense, useState } from "react";
 import { Await, LoaderFunctionArgs, defer, useLoaderData } from "react-router-dom";
-import { getSingleVideo } from "../utils/api";
+import { getVideoDetails } from "../utils/api";
 import {
 	ActionBtnCont,
 	AddToList,
@@ -21,7 +21,7 @@ import { IVideoDetails } from "../types/video";
 import VideoCard from "../components/VideoCard";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-	const data = await getSingleVideo({ params } as LoaderFunctionArgs);
+	const data = await getVideoDetails({ params } as LoaderFunctionArgs);
 	return defer({ videoDetails: data.success ? data.videoDetails : null });
 };
 

@@ -1,11 +1,11 @@
-import { useLoaderData } from "react-router-dom";
+import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import { Container, CatCont, FilterTitle } from "../styles/Videos.css";
 import { getAllVideos } from "../utils/api";
 import VideoCard from "../components/VideoCard";
 import IVideo from "../types/video";
 
-export const loader = async () => {
-	const data = await getAllVideos();
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+	const data = await getAllVideos({ request } as LoaderFunctionArgs);
 	return data.success ? data.videos : null;
 };
 
