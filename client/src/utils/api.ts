@@ -171,4 +171,21 @@ export const DeleteFromSave = async (videoId: string) => {
 };
 
 // History API
+export const AddToHistory = async (videoId: string) => {
+	try {
+		const { data } = await axios.post("/history", { videoId }, config);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
+
+export const DeleteFromHistory = async (videoId: string) => {
+	try {
+		const { data } = await axios.delete(`/history/${videoId}`);
+		return data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
 // PlayList API
