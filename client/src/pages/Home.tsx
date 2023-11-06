@@ -1,18 +1,14 @@
 import { useEffect } from "react";
-import { useLoaderData, useOutletContext } from "react-router-dom";
-import { Container, CatCont, FilterTitle } from "../styles/Home.css";
-import { getAllVideos, getLoggedInUser } from "../utils/api";
-import VideoCard from "../components/VideoCard";
-import IVideo from "../types/video";
+import { useOutletContext } from "react-router-dom";
+import { Container } from "../styles/Home.css";
+import { getLoggedInUser } from "../utils/api";
 
 export const loader = async () => {
-	const data = await getAllVideos();
-	return data.success ? data.videos : null;
+	return null;
 };
 
 const Home = () => {
 	const [setNewUser]: [React.Dispatch<unknown>] = useOutletContext();
-	const videos: IVideo[] = useLoaderData();
 
 	useEffect(() => {
 		(async () => {
@@ -23,12 +19,7 @@ const Home = () => {
 
 	return (
 		<Container>
-			{videos?.map((video, idx) => (
-				<VideoCard
-					key={idx}
-					video={video}
-				/>
-			))}
+			Home
 		</Container>
 	);
 };

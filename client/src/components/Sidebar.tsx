@@ -16,7 +16,7 @@ const Sidebar = () => {
 				<MdOutlineHome size="1.5em" />
 				<Text>Home</Text>
 			</NavLink>
-			<NavLink to="/videos">
+			<NavLink to="/host/videos">
 				<MdOutlineExplore size="1.5em" />
 				<Text>Explore</Text>
 			</NavLink>
