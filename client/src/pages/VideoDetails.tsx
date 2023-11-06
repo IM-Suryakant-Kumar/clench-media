@@ -1,6 +1,14 @@
-import { Suspense, useState } from "react";
-import { Await, LoaderFunctionArgs, defer, useLoaderData, useParams } from "react-router-dom";
-import { getVideoDetails } from "../utils/api";
+import { useMemo, useState } from "react";
+import { LoaderFunctionArgs, useLoaderData, useParams } from "react-router-dom";
+import {
+	addToSave,
+	createDislike,
+	createLike,
+	deleteDislike,
+	deleteFromSave,
+	deleteLike,
+	getVideoDetails,
+} from "../utils/api";
 import {
 	ActionBtnCont,
 	AddToList,
@@ -17,120 +25,163 @@ import {
 	VideoCont,
 	VideoPlayer,
 } from "../styles/VideoDeatils.css";
-import { IVideoDetails } from "../types/video";
+import { IActions, IVideoDetails } from "../types/video";
 import VideoCard from "../components/VideoCard";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
 	const data = await getVideoDetails({ params } as LoaderFunctionArgs);
-	return defer({ videoDetails: data.success ? data.videoDetails : null });
+	return data.success ? data.videoDetails : null;
 };
 
 const VideoDetails = () => {
-	const loaderData = useLoaderData();
-	console.log(loaderData);
-    const { id: videoId } = useParams()
-    console.log(videoId)
+	const videoDetails: IVideoDetails = useLoaderData() as Pick<
+		IVideoDetails,
+		"actions" | "video" | "relatedVideos"
+	>;
+	const videoId = useParams().id as string;
 
-	const [isLiked, setIsLiked] = useState<boolean>();
-	const [isDisliked, setIsDisliked] = useState<boolean>();
-	const [isSaved, setIsSaved] = useState<boolean>();
-	const [isAddedToList, setIsAddedToList] = useState<boolean>();
+	const [actions, setActions] = useState<IActions>({
+		isLiked: false,
+		isDisliked: false,
+		isSaved: false,
+		isInPlaylist: false,
+	});
 
-	const renderVideoDetails = (videoDetails: IVideoDetails) => {
-		const handleLike = () => {
-			isDisliked && setIsDisliked((prevState) => !prevState);
-			setIsLiked((prevState) => !prevState);
-		};
+	useMemo(() => {
+		setActions((prevActions) => ({
+			...prevActions,
+			isLiked: videoDetails.actions.isLiked,
+			isDisliked: videoDetails.actions.isDisliked,
+			isSaved: videoDetails.actions.isSaved,
+			isInPlaylist: videoDetails.actions.isInPlaylist,
+		}));
+	}, [videoDetails]);
 
-		const handleDislike = () => {
-			isLiked && setIsLiked((prevState) => !prevState);
-			setIsDisliked((prevState) => !prevState);
-		};
+	const handleLike = async () => {
+		actions.isDisliked &&
+			setActions((prevActions) => ({
+				...prevActions,
+				isDisliked: !prevActions?.isDisliked,
+			})),
+			await deleteDislike(videoId);
 
-		const handleSaved = () => setIsSaved((prevState) => !prevState);
+		actions.isLiked ? await deleteLike(videoId) : await createLike(videoId);
 
-		const handleAddedToList = () => setIsAddedToList((prevState) => !prevState);
+		setActions((prevActions) => ({
+			...prevActions,
+			isLiked: !prevActions?.isLiked,
+		}));
+	};
 
-		return (
-			<Container>
-				<VideoCont>
-					<VideoPlayer
-						src={`https://www.youtube.com/embed/${videoDetails.video.videoId}?autoplay=1`}
-						// allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-						// allowFullScreen
-					/>
-					<Title>{videoDetails.video.title}</Title>
-					<Text>{videoDetails.video.creator}</Text>
-					<Text>{videoDetails.video.views}</Text>
-					<Text>{videoDetails.video.published}</Text>
-					<Desc>{videoDetails.video.description}</Desc>
-					<ActionBtnCont>
-						{isLiked || videoDetails.actions.isLiked ? (
-							<Like
-								size="1.25rem"
-								color="#3a85fff3"
-								onClick={handleLike}
-							/>
-						) : (
-							<Like
-								size="1.25rem"
-								onClick={handleLike}
-							/>
-						)}
-						{isDisliked || videoDetails.actions.isDisliked ? (
-							<Dislike
-								size="1.25rem"
-								color="#3a85fff3"
-								onClick={handleDislike}
-							/>
-						) : (
-							<Dislike
-								size="1.25rem"
-								onClick={handleDislike}
-							/>
-						)}
-						{isSaved || videoDetails.actions.isSaved ? (
-							<RemoveFromWatch
-								size="1.25rem"
-								color="#3a85fff3"
-								onClick={handleSaved}
-							/>
-						) : (
-							<AddToWatch
-								size="1.25rem"
-								onClick={handleSaved}
-							/>
-						)}
-						{isAddedToList || videoDetails.actions.isInPlaylist ? (
-							<RemoveFromList
-								size="1.25rem"
-								color="#3a85fff3"
-								onClick={handleAddedToList}
-							/>
-						) : (
-							<AddToList
-								size="1.25rem"
-								onClick={handleAddedToList}
-							/>
-						)}
-					</ActionBtnCont>
-				</VideoCont>
-				<RelatedVideoCont>
-					{videoDetails.relatedVideos?.map((video, idx) => (
-						<VideoCard
-							key={idx}
-							video={video}
-						/>
-					))}
-				</RelatedVideoCont>
-			</Container>
-		);
+	const handleDislike = async () => {
+		actions.isLiked &&
+			setActions((prevActions) => ({
+				...prevActions,
+				isLiked: !prevActions?.isLiked,
+			})),
+			await deleteLike(videoId);
+
+		actions.isDisliked
+			? await deleteDislike(videoId)
+			: await createDislike(videoId);
+
+		setActions((prevActions) => ({
+			...prevActions,
+			isDisliked: !prevActions?.isDisliked,
+		}));
+	};
+
+	const handleSaved = async () => {
+		actions.isSaved
+			? await deleteFromSave(videoId)
+			: await addToSave(videoId);
+
+		setActions((prevActions) => ({
+			...prevActions,
+			isSaved: !prevActions?.isSaved,
+		}));
+	};
+
+	const handleAddedToList = () => {
+		setActions((prevActions) => ({
+			...prevActions,
+			isInPlaylist: !prevActions?.isInPlaylist,
+		}));
 	};
 
 	return (
-		<Suspense fallback={<h3>Loading...</h3>}>
-			<Await resolve={loaderData?.videoDetails}>{renderVideoDetails}</Await>
-		</Suspense>
+		<Container>
+			<VideoCont>
+				<VideoPlayer
+					src={`https://www.youtube.com/embed/${videoDetails.video.videoId}?autoplay=1`}
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowFullScreen
+				/>
+				<Title>{videoDetails.video.title}</Title>
+				<Text>{videoDetails.video.creator}</Text>
+				<Text>{videoDetails.video.views}</Text>
+				<Text>{videoDetails.video.published}</Text>
+				<Desc>{videoDetails.video.description}</Desc>
+				<ActionBtnCont>
+					{actions.isLiked ? (
+						<Like
+							size="1.25rem"
+							color="#3a85fff3"
+							onClick={handleLike}
+						/>
+					) : (
+						<Like
+							size="1.25rem"
+							onClick={handleLike}
+						/>
+					)}
+					{actions.isDisliked ? (
+						<Dislike
+							size="1.25rem"
+							color="#3a85fff3"
+							onClick={handleDislike}
+						/>
+					) : (
+						<Dislike
+							size="1.25rem"
+							onClick={handleDislike}
+						/>
+					)}
+					{actions.isSaved ? (
+						<RemoveFromWatch
+							size="1.25rem"
+							color="#3a85fff3"
+							onClick={handleSaved}
+						/>
+					) : (
+						<AddToWatch
+							size="1.25rem"
+							onClick={handleSaved}
+						/>
+					)}
+					{actions.isInPlaylist ? (
+						<RemoveFromList
+							size="1.25rem"
+							color="#3a85fff3"
+							onClick={handleAddedToList}
+						/>
+					) : (
+						<AddToList
+							size="1.25rem"
+							onClick={handleAddedToList}
+						/>
+					)}
+				</ActionBtnCont>
+			</VideoCont>
+			<RelatedVideoCont>
+				{videoDetails.relatedVideos?.map((video, idx) => (
+					<VideoCard
+						key={idx}
+						video={video}
+					/>
+				))}
+			</RelatedVideoCont>
+		</Container>
 	);
 };
 

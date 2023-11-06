@@ -2,7 +2,6 @@ import axios from "./axios";
 import { ILUser, IRUser } from "../types/user";
 import { toast } from "react-toastify";
 import { LoaderFunctionArgs } from "react-router-dom";
-import IVideo from "../types/video";
 import { filterByCategory, filterBySearch } from "./filter";
 
 const config = { headers: { Content_Type: "application/json" } };
@@ -58,6 +57,7 @@ export const getLoggedInUser = async () => {
 	try {
 		return (await axios.get("/me")).data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
@@ -75,6 +75,7 @@ export const getAllVideos = async ({ request }: LoaderFunctionArgs) => {
 		search && (data.videos = filterBySearch(data.videos, search));
 		return data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
@@ -83,6 +84,7 @@ export const getCategories = async () => {
 	try {
 		return (await axios.get("/categories")).data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
@@ -92,6 +94,7 @@ export const getVideoDetails = async ({ params }: LoaderFunctionArgs) => {
 		const { data } = await axios.get(`/videos/${params.id}`);
 		return data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
@@ -102,6 +105,7 @@ export const createLike = async (videoId: string) => {
 		const { data } = await axios.post("/like", { videoId }, config);
 		return data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
@@ -111,6 +115,7 @@ export const deleteLike = async (videoId: string) => {
 		const { data } = await axios.delete(`/like/${videoId}`);
 		return data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
@@ -121,6 +126,7 @@ export const createDislike = async (videoId: string) => {
 		const { data } = await axios.post("/dislike", { videoId }, config);
 		return data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
@@ -130,26 +136,29 @@ export const deleteDislike = async (videoId: string) => {
 		const { data } = await axios.delete(`/dislike/${videoId}`);
 		return data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
 
 // Save API
-export const AddToSave = async (videoId: string) => {
+export const addToSave = async (videoId: string) => {
 	try {
 		const { data } = await axios.post("/save", { videoId }, config);
 		return data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
 
-export const DeleteFromSave = async (videoId: string) => {
+export const deleteFromSave = async (videoId: string) => {
 	try {
 		const { data } = await axios.delete(`/save/${videoId}`);
 		return data;
 	} catch (error) {
-		return error>.response.data;
+        console.log(error?.response.data)
+		return error?.response.data;
 	}
 };
 
@@ -159,6 +168,7 @@ export const AddToHistory = async (videoId: string) => {
 		const { data } = await axios.post("/history", { videoId }, config);
 		return data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
@@ -168,6 +178,7 @@ export const DeleteFromHistory = async (videoId: string) => {
 		const { data } = await axios.delete(`/history/${videoId}`);
 		return data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
@@ -178,6 +189,7 @@ export const AddToPlaylist = async (name: string, videoId: string) => {
 		const { data } = await axios.post("/playlist", { name, videoId }, config);
 		return data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };
@@ -187,6 +199,7 @@ export const DeleteFromPlaylist = async (name: string, videoId: string) => {
 		const { data } = await axios.put(`/playlist`, { name, videoId }, config);
 		return data;
 	} catch (error) {
+        console.log(error?.response.data)
 		return error?.response.data;
 	}
 };

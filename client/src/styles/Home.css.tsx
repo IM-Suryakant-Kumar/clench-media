@@ -31,6 +31,13 @@ export const Title = styled.h1`
 	text-align: center;
 	font-size: large;
 	font-family: Cinzel;
+
+    @media (min-width: 500px) {
+        font-size: x-large;
+    }
+    @media (min-width: 1240px) {
+        font-size: xx-large;
+    }
 `;
 
 export const CardCont = styled.div`

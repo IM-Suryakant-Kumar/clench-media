@@ -9,13 +9,15 @@ export default interface IVideo {
 	published: string;
 }
 
+export interface IActions {
+	isLiked: boolean;
+	isDisliked: boolean;
+	isSaved: boolean;
+	isInPlaylist: boolean;
+}
+
 export interface IVideoDetails {
 	video: IVideo;
 	relatedVideos: IVideo[];
-	actions: {
-		isLiked: boolean;
-		isDisliked: boolean;
-		isSaved: boolean;
-		isInPlaylist: boolean;
-	};
+	actions: IActions;
 }

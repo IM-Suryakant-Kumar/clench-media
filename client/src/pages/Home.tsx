@@ -11,7 +11,7 @@ export const loader = async () => {
 
 const Home = () => {
 	const [setNewUser]: [React.Dispatch<unknown>] = useOutletContext();
-	const categories: string[] = useLoaderData();
+	const categories: string[] = useLoaderData() as string[];
 
 	useEffect(() => {
 		(async () => {
