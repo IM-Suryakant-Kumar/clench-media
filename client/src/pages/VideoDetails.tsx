@@ -1,5 +1,5 @@
 import { Suspense, useState } from "react";
-import { Await, LoaderFunctionArgs, defer, useLoaderData } from "react-router-dom";
+import { Await, LoaderFunctionArgs, defer, useLoaderData, useParams } from "react-router-dom";
 import { getVideoDetails } from "../utils/api";
 import {
 	ActionBtnCont,
@@ -28,6 +28,8 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 const VideoDetails = () => {
 	const loaderData = useLoaderData();
 	console.log(loaderData);
+    const { id: videoId } = useParams()
+    console.log(videoId)
 
 	const [isLiked, setIsLiked] = useState<boolean>();
 	const [isDisliked, setIsDisliked] = useState<boolean>();
