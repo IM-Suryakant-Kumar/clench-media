@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { media } from "./Responsive.css";
 
 export const Container = styled.div`
+    background-color: var(--primary-bg);
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;

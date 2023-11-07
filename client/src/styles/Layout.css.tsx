@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { media } from "./Responsive.css";
 
 export const Container = styled.div`
-	background-color: var(--primary-bg);
-	height: 100vh;
+	background-color: var(--primary-color);
+	/* height: 100vh; */
 	position: relative;
 `;
 
