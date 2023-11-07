@@ -1,3 +1,5 @@
+import IPlaylists from "./playlist";
+
 export default interface IVideo {
 	videoId: string;
 	title: string;
@@ -13,7 +15,7 @@ export interface IActions {
 	isLiked: boolean;
 	isDisliked: boolean;
 	isSaved: boolean;
-	isInPlaylist: boolean;
+	playlists: IPlaylists | null;
 }
 
 export interface IVideoDetails {

@@ -41,8 +41,9 @@ const VideoDetails = () => {
 		isLiked: false,
 		isDisliked: false,
 		isSaved: false,
-		isInPlaylist: false,
+		playlists: null,
 	});
+    console.log(actions.playlists)
 
 	useMemo(() => {
 		setActions((prevActions) => ({
@@ -50,7 +51,7 @@ const VideoDetails = () => {
 			isLiked: videoDetails.actions.isLiked,
 			isDisliked: videoDetails.actions.isDisliked,
 			isSaved: videoDetails.actions.isSaved,
-			isInPlaylist: videoDetails.actions.isInPlaylist,
+			playlists: videoDetails.actions.playlists,
 		}));
 	}, [videoDetails]);
 

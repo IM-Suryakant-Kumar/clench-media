@@ -32,10 +32,10 @@ export const getVideoDetails = async (req: Request, res: Response) => {
 		videoId: newReq.params.id,
 	});
 	const isSaved = await Save.findOne({ userId: newReq.user._id, videoId: newReq.params.id });
-	const playlist = await Playlist.findOne({ userId: newReq.user._id });
-	const isInPlaylist = playlist?.playlists.find((item) => {
-		return Boolean(item.videoIds.find((id) => id === newReq.params.id));
-	});
+	const playlists = (await Playlist.findOne({ userId: newReq.user._id }))?.playlists;
+	// const isInPlaylist = playlist?.playlists.find((item) => {
+	// 	return Boolean(item.videoIds.find((id) => id === newReq.params.id));
+	// });
 
 	res.status(StatusCodes.OK).json({
 		success: true,
@@ -46,7 +46,7 @@ export const getVideoDetails = async (req: Request, res: Response) => {
 				isLiked: Boolean(isLiked),
 				isDisliked: Boolean(isDisliked),
 				isSaved: Boolean(isSaved),
-				isInPlaylist: Boolean(isInPlaylist),
+				playlists,
 			},
 		},
 	});
