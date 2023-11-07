@@ -202,7 +202,7 @@ export const DeleteFromHistory = async (videoId: string) => {
 };
 
 // PlayList API
-export const AddToPlaylist = async (name: string, videoId: string) => {
+export const addToPlaylist = async (name: string, videoId: string) => {
 	try {
 		const { data } = await axios.post(
 			"/playlist",
@@ -217,7 +217,7 @@ export const AddToPlaylist = async (name: string, videoId: string) => {
 	}
 };
 
-export const DeleteFromPlaylist = async (name: string, videoId: string) => {
+export const deleteFromPlaylist = async (name: string, videoId: string) => {
 	try {
 		const { data } = await axios.put(
 			`/playlist`,

@@ -22,7 +22,7 @@ export const addToPlaylist = async (req: Request, res: Response) => {
 		user: { _id },
 	} = req as IReq;
 
-	const playlist = await Playlist.findOne({ userId: _id });
+	let playlist = await Playlist.findOne({ userId: _id });
 
 	const restPlaylists =
 		playlist?.playlists.filter((item) => item.name !== name) || [];
@@ -30,21 +30,23 @@ export const addToPlaylist = async (req: Request, res: Response) => {
 		playlist?.playlists.find((item) => item.name === name)?.videoIds || [];
 
 	if (!playlist)
-		await Playlist.create({
+		playlist = await Playlist.create({
 			userId: _id,
 			playlists: [{ name, videoIds: [videoId] }],
 		});
 	else
-		await Playlist.findOneAndUpdate(
+		playlist = await Playlist.findOneAndUpdate(
 			{ userId: _id },
 			{
 				userId: _id,
 				playlists: [...restPlaylists, { name, videoIds }],
 			},
+			{ new: true },
 		);
 	res.status(StatusCodes.CREATED).json({
 		success: true,
 		message: "added to playlist",
+		playlists: playlist?.playlists,
 	});
 };
 
@@ -54,7 +56,7 @@ export const removeFromPlaylist = async (req: Request, res: Response) => {
 		user: { _id },
 	} = req as IReq;
 
-	const playlist = await Playlist.findOne({ userId: _id });
+	let playlist = await Playlist.findOne({ userId: _id });
 
 	const restPlaylists =
 		playlist?.playlists.filter((item) => item.name !== name) || [];
@@ -62,13 +64,15 @@ export const removeFromPlaylist = async (req: Request, res: Response) => {
 		playlist?.playlists.find((item) => item.name === name)?.videoIds || [];
 	videoIds = videoIds.filter((item) => item !== videoId);
 
-	await Playlist.findOneAndUpdate(
+	playlist = await Playlist.findOneAndUpdate(
 		{ userId: _id },
 		{ userId: _id, playlists: [...restPlaylists, { name, videoIds }] },
+		{ new: true },
 	);
 
 	res.status(StatusCodes.OK).json({
 		success: true,
 		message: "removed from playlist",
+        playlists: playlist?.playlists
 	});
 };

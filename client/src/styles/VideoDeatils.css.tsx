@@ -4,12 +4,12 @@ import {
 	MdOutlineLibraryAdd,
 	MdOutlineLibraryAddCheck,
 	MdPlaylistAdd,
-	MdPlaylistAddCheck,
 	MdThumbDownAlt,
 	MdThumbUpAlt,
 } from "react-icons/md";
 
 export const Container = styled.div`
+	background-color: var(--primary-bg);
 	position: relative;
 `;
 
@@ -101,9 +101,6 @@ export const RemoveFromWatch = styled(MdOutlineLibraryAddCheck)`
 `;
 
 export const AddToList = styled(MdPlaylistAdd)`
-	right: 0.25em;
-`;
-export const RemoveFromList = styled(MdPlaylistAddCheck)`
 	right: 0.25em;
 `;
 

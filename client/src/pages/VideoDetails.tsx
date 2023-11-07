@@ -18,7 +18,6 @@ import {
 	Dislike,
 	Like,
 	RelatedVideoCont,
-	RemoveFromList,
 	RemoveFromWatch,
 	Text,
 	Title,
@@ -27,6 +26,7 @@ import {
 } from "../styles/VideoDeatils.css";
 import { IActions, IVideoDetails } from "../types/video";
 import VideoCard from "../components/VideoCard";
+import PlalistModal from "../components/PlalistModal";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
 	const data = await getVideoDetails({ params } as LoaderFunctionArgs);
@@ -43,7 +43,8 @@ const VideoDetails = () => {
 		isSaved: false,
 		playlists: null,
 	});
-    console.log(actions.playlists)
+	const [toggleModal, setToggleModal] = useState<boolean>(false);
+	// console.log(actions.playlists);
 
 	useMemo(() => {
 		setActions((prevActions) => ({
@@ -100,20 +101,15 @@ const VideoDetails = () => {
 		}));
 	};
 
-	const handleAddedToList = () => {
-		setActions((prevActions) => ({
-			...prevActions,
-			isInPlaylist: !prevActions?.isInPlaylist,
-		}));
-	};
+	const handleToggleModal = () => setToggleModal((prevState) => !prevState);
 
 	return (
 		<Container>
 			<VideoCont>
 				<VideoPlayer
 					src={`https://www.youtube.com/embed/${videoDetails.video.videoId}?autoplay=1`}
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowFullScreen
+					// allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					// allowFullScreen
 				/>
 				<Title>{videoDetails.video.title}</Title>
 				<Text>{videoDetails.video.creator}</Text>
@@ -157,18 +153,10 @@ const VideoDetails = () => {
 							onClick={handleSaved}
 						/>
 					)}
-					{actions.isInPlaylist ? (
-						<RemoveFromList
-							size="1.25rem"
-							color="#3a85fff3"
-							onClick={handleAddedToList}
-						/>
-					) : (
-						<AddToList
-							size="1.25rem"
-							onClick={handleAddedToList}
-						/>
-					)}
+					<AddToList
+						size="1.25rem"
+						onClick={handleToggleModal}
+					/>
 				</ActionBtnCont>
 			</VideoCont>
 			<RelatedVideoCont>
@@ -179,6 +167,13 @@ const VideoDetails = () => {
 					/>
 				))}
 			</RelatedVideoCont>
+			<PlalistModal
+				videoId={videoId}
+				toggleModal={toggleModal}
+				handleToggleModal={handleToggleModal}
+				playlists={actions.playlists}
+                setActions={setActions}
+			/>
 		</Container>
 	);
 };
