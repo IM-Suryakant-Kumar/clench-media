@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-this-alias */
-/* eslint-disable prefer-rest-params */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export const debounce = (fn: (...args: any[]) => void, delay: number) => {
+export const debounce = (fn: () => void, delay: number) => {
 	let timerID: number;
 	return function () {
-		if (timerID) clearTimeout(timerID);
-		const context: any = this;
-		const args = arguments;
+		// eslint-disable-next-line @typescript-eslint/no-this-alias, prefer-rest-params
+		const context = this, args = arguments;
+        if (timerID) clearTimeout(timerID);
 		timerID = setTimeout(() => fn.apply(context, args), delay);
 	};
 };

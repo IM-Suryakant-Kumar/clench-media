@@ -1,14 +1,15 @@
 import { css } from "styled-components";
+import { Styles } from "styled-components/dist/types";
 
 export const media = {
-	sm: (...args) => css`
+	sm: (styles: Styles<object>) => css`
 		@media (max-width: 767px) {
-			${css(...args)};
+			${css(styles)};
 		}
 	`,
-	lg: (...args) => css`
+	lg: (styles: Styles<object>) => css`
 		@media (min-width: 768px) {
-			${css(...args)};
+			${css(styles)};
 		}
 	`,
 };
