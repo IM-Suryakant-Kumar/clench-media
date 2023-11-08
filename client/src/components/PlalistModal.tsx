@@ -15,6 +15,7 @@ import IPlaylists from "../types/playlist";
 import { addToPlaylist, deleteFromPlaylist } from "../utils/api";
 import { IActions } from "../types/video";
 import isVideoIdExists from "../utils/isVideoIdExists";
+import Loader from "./Loader";
 
 type Props = {
 	videoId: string;
@@ -70,6 +71,7 @@ const PlalistModal: React.FC<Props> = ({
 	return (
 		<Container $toggle={`${toggleModal}`}>
 			<Modal>
+                <Loader display={submitting} />
 				<CloseBtn
 					size="1.5rem"
 					onClick={handleCloseBtn}
