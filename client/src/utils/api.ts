@@ -188,6 +188,17 @@ export const deleteFromSave = async (videoId: string) => {
 	}
 };
 
+export const getAllSavedVideos = async () => {
+	try {
+		const { data } = await axios.get("/save");
+        return data
+	} catch (error) {
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
+	}
+};
+
 // History API
 export const AddToHistory = async (videoId: string) => {
 	try {
