@@ -255,3 +255,14 @@ export const deleteFromPlaylist = async (name: string, videoId: string) => {
 		return newError.response.data;
 	}
 };
+
+export const getAllPlaylist = async () => {
+	try {
+		const { data } = await axios.get("/playlist");
+        return data
+	} catch (error) {
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
+	}
+};

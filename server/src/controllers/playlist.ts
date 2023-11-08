@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import Playlist from "../models/Playlist";
 import { StatusCodes } from "http-status-codes";
+import Video from "../models/Video";
 
 interface IBody {
-	name: string;
-	videoId: string;
+	name?: string;
+	videoId?: string;
 }
 
 interface IUser {
@@ -28,7 +29,7 @@ export const addToPlaylist = async (req: Request, res: Response) => {
 	const videoIds: string[] =
 		playlist?.playlists.find((item) => item.name === name)?.videoIds || [];
 	// Add videoId to videoIds
-	videoIds.push(videoId);
+	videoIds.push(videoId as string);
 
 	if (!playlist)
 		playlist = await Playlist.create({
@@ -74,4 +75,20 @@ export const removeFromPlaylist = async (req: Request, res: Response) => {
 		message: "removed from playlist",
 		playlists: playlist?.playlists,
 	});
+};
+
+export const getAllPlaylist = async (req: Request, res: Response) => {
+	const {
+		user: { _id },
+	} = req as IReq;
+
+	const playlist = await Playlist.findOne({ userId: _id });
+	const videos = await Video.find();
+
+	const allPlaylist = playlist?.playlists.map((item) => ({
+		name: item.name,
+		videos: item.videoIds.map((videoId) => videos.find((v) => v.videoId === videoId)),
+	}));
+
+	res.status(StatusCodes.OK).json({ success: true, allPlaylist });
 };

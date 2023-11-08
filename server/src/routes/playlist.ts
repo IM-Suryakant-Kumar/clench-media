@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { addToPlaylist, removeFromPlaylist } from "../controllers/playlist";
+import { addToPlaylist, getAllPlaylist, removeFromPlaylist } from "../controllers/playlist";
 
 const router = Router();
 
-router.route("/playlist").post(addToPlaylist).put(removeFromPlaylist);
+router.route("/playlist").post(addToPlaylist).put(removeFromPlaylist).get(getAllPlaylist);
 
 export default router;
