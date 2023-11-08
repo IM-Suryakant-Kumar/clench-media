@@ -35,10 +35,6 @@ a {
 	color: inherit;
 }
 
-a.active {
-	color: var(--active-cl);
-}
-
 /* Loader css */
 .lds-roller {
 	display: inline-block;

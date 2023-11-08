@@ -9,7 +9,6 @@ import {
 } from "react-icons/md";
 
 export const Container = styled.div`
-	background-color: var(--primary-bg);
 	position: relative;
 `;
 
@@ -121,7 +120,7 @@ export const RelatedVideoCont = styled.div`
     `}
 	@media (min-width: 800px) {
 		width: 34%;
-        padding-right: 1.5em;
+		padding-right: 1.5em;
 		position: absolute;
 		right: 0;
 		top: -25.25em;

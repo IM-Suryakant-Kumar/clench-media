@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { media } from "./Responsive.css";
 
 export const Container = styled.div`
-	background-color: var(--primary-bg);
 	padding: 0.2em 0.2em 6em 0.2em;
 
 	${media.lg`
