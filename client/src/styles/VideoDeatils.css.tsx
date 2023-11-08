@@ -29,7 +29,7 @@ export const VideoCont = styled.div`
         top: 4em;
     `}
 	@media (min-width: 800px) {
-		right: 38%;
+		right: 34%;
 	}
 	@media (min-width: 1100px) {
 		bottom: 25%;
@@ -120,7 +120,7 @@ export const RelatedVideoCont = styled.div`
         padding-bottom: 0;
     `}
 	@media (min-width: 800px) {
-		width: calc(38% + 3em);
+		width: 30%;
 		position: absolute;
 		right: 0;
 		top: -25.25em;

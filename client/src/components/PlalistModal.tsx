@@ -55,20 +55,20 @@ const PlalistModal: React.FC<Props> = ({
 	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = e.target;
 
-        // handleSubmitting
-        setSubmitting(true)
+		// handleSubmitting
+		setSubmitting(true);
 		const data = checked
 			? await addToPlaylist(name, videoId)
 			: await deleteFromPlaylist(name, videoId);
-        setSubmitting(false)
+		setSubmitting(false);
 
 		setActions((prevActions) => ({ ...prevActions, playlists: data.playlists }));
 	};
 
 	return (
 		<Container $toggle={`${toggleModal}`}>
+			<Loader display={submitting} />
 			<Modal>
-                <Loader display={submitting} />
 				<CloseBtn
 					size="1.5rem"
 					onClick={handleCloseBtn}
@@ -83,7 +83,7 @@ const PlalistModal: React.FC<Props> = ({
 						}
 						required
 					/>
-					<ModalButton type="submit">{submitting ? "CREATING..." : "CREATE"}</ModalButton>
+					<ModalButton type="submit">CREATE</ModalButton>
 					<ModalButton
 						type="button"
 						onClick={handleCloseBtn}

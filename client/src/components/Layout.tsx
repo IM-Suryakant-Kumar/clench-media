@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getLoggedInUser } from "../utils/api";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-import { Container, Main } from "../styles/Layout.css";
+import { Container, Main, Wrapper } from "../styles/Layout.css";
 import { useState } from "react";
 import { User } from "../types/user";
 import Loader from "./Loader";
@@ -22,15 +22,17 @@ const Layout = () => {
 
 	return (
 		<Container>
-			<Loader display={navigation.state === "loading" ? true : false} />
-			<Navbar
-				user={newUser}
-				setUser={setNewUser}
-			/>
-			<Main>
-				<Sidebar />
-				<Outlet context={[setNewUser]} />
-			</Main>
+			{navigation.state === "loading" && <Loader display={true} />}
+			<Wrapper>
+				<Navbar
+					user={newUser}
+					setUser={setNewUser}
+				/>
+				<Main>
+					<Sidebar />
+					<Outlet context={[setNewUser]} />
+				</Main>
+			</Wrapper>
 			<ToastContainer
 				autoClose={1000}
 				pauseOnFocusLoss={false}
