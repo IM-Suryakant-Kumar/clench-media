@@ -13,6 +13,7 @@ import Signup, { loader as signupLoader, action as signupAction } from "./pages/
 import HostLayout, { loader as hostLayoutLoader } from "./components/HostLayout";
 import VideoDetails, { loader as videoDetailsLoader } from "./pages/VideoDetails";
 import Like, { loader as likeLoader } from "./pages/Like";
+import Playlist, { loader as playlistLoader } from "./pages/Playlist";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -48,7 +49,8 @@ const router = createBrowserRouter(
 				/>
 				<Route
 					path="playlists"
-					element={<h1>playlist</h1>}
+					element={<Playlist />}
+                    loader={playlistLoader}
 				/>
 				<Route
 					path="watchlater"
