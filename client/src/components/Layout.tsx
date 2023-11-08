@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar";
 import { Container, Main } from "../styles/Layout.css";
 import { useState } from "react";
 import { User } from "../types/user";
+import Loader from "./Loader";
 
 export const loader = async () => {
 	const data = await getLoggedInUser();
@@ -17,11 +18,11 @@ const Layout = () => {
 	const user = useLoaderData() as User | null;
 	const [newUser, setNewUser] = useState(user);
 
-    const navigation = useNavigation();
-    console.log(navigation.state)
+	const navigation = useNavigation();
 
 	return (
 		<Container>
+			<Loader display={navigation.state === "loading" ? true : false} />
 			<Navbar
 				user={newUser}
 				setUser={setNewUser}

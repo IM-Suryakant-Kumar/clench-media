@@ -22,6 +22,9 @@ export const Modal = styled.div`
 	width: 18.125rem;
 	/* height: 9rem; */
 	position: relative;
+    @media (min-width: 425px) {
+        width: 22rem;
+    }
 `;
 
 export const CloseBtn = styled(MdClose)`

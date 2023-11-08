@@ -106,17 +106,17 @@ export const AddToList = styled(MdPlaylistAdd)`
 
 export const RelatedVideoCont = styled.div`
 	width: 100%;
-	margin-top: 16em;
+	padding-top: 16em;
 	padding-bottom: 5em;
 
 	@media (min-width: 350px) and (max-width: 500px) {
-		margin-top: 21.5em;
+		padding-top: 21.5em;
 	}
 	@media (min-width: 500px) and (max-width: 768px) {
-		margin-top: 23.5em;
+		padding-top: 23.5em;
 	}
 	${media.lg`
-        margin-top: 25.5em;
+        padding-top: 25.5em;
         padding-bottom: 0;
     `}
 	@media (min-width: 800px) {

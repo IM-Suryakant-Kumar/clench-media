@@ -34,9 +34,6 @@ const PlalistModal: React.FC<Props> = ({
 }) => {
 	const [playlistName, setPlaylistName] = useState<string>("");
 	const [submitting, setSubmitting] = useState<boolean>(false);
-	// const navigation = useNavigation();
-	// console.log(navigation.state);
-	console.log(submitting);
 
 	const handleCloseBtn = () => {
 		setPlaylistName("");
