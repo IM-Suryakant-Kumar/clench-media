@@ -1,4 +1,4 @@
-import { Outlet, redirect, useLoaderData } from "react-router-dom";
+import { Outlet, redirect, useLoaderData, useNavigation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getLoggedInUser } from "../utils/api";
@@ -16,6 +16,9 @@ export const loader = async () => {
 const Layout = () => {
 	const user = useLoaderData() as User | null;
 	const [newUser, setNewUser] = useState(user);
+
+    const navigation = useNavigation();
+    console.log(navigation.state)
 
 	return (
 		<Container>

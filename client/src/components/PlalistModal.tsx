@@ -12,7 +12,7 @@ import {
 	ModalButton,
 } from "../styles/PlaylistModal.css";
 import IPlaylists from "../types/playlist";
-import { addToPlaylist } from "../utils/api";
+import { addToPlaylist, deleteFromPlaylist } from "../utils/api";
 import { IActions } from "../types/video";
 import isVideoIdExists from "../utils/isVideoIdExists";
 
@@ -31,31 +31,41 @@ const PlalistModal: React.FC<Props> = ({
 	setActions,
 	playlists,
 }) => {
-	const [name, setName] = useState<string>("");
+	const [playlistName, setPlaylistName] = useState<string>("");
+	const [submitting, setSubmitting] = useState<boolean>(false);
+	// const navigation = useNavigation();
+	// console.log(navigation.state);
+	console.log(submitting);
 
 	const handleCloseBtn = () => {
-		setName("");
+		setPlaylistName("");
 		handleToggleModal();
 	};
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		// const data = await addToPlaylist(name, videoId);
+		// handleSubmitting
+		setSubmitting(true);
 
-		// if (data.success)
-		// 	setActions((prevActions) => ({
-		// 		...prevActions,
-		// 		playlists: data.playlists,
-		// 	}));
+		const data = await addToPlaylist(playlistName, videoId);
+		setActions((prevActions) => ({ ...prevActions, playlists: data.playlists }));
+
+		setSubmitting(false);
 	};
 
-	const newPlaylist = [
-		{ name: "Supplementary", videoIds: ["PxNDgI8SD3U"] },
-		{ name: "javascript", videoIds: [] },
-		{ name: "typesript", videoIds: [] },
-		{ name: "react", videoIds: [] },
-	];
+	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, checked } = e.target;
+
+        // handleSubmitting
+        setSubmitting(true)
+		const data = checked
+			? await addToPlaylist(name, videoId)
+			: await deleteFromPlaylist(name, videoId);
+        setSubmitting(false)
+
+		setActions((prevActions) => ({ ...prevActions, playlists: data.playlists }));
+	};
 
 	return (
 		<Container $toggle={`${toggleModal}`}>
@@ -68,12 +78,13 @@ const PlalistModal: React.FC<Props> = ({
 					<Input
 						type="text"
 						placeholder="Playlist name"
-						value={name}
+						value={playlistName}
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							setName(e.target.value)
+							setPlaylistName(e.target.value)
 						}
+						required
 					/>
-					<ModalButton type="submit">CREATE</ModalButton>
+					<ModalButton type="submit">{submitting ? "CREATING..." : "CREATE"}</ModalButton>
 					<ModalButton
 						type="button"
 						onClick={handleCloseBtn}
@@ -81,19 +92,16 @@ const PlalistModal: React.FC<Props> = ({
 						CANCEL
 					</ModalButton>
 					{/* -----------Playlist Cont-------------- */}
-					{newPlaylist.length > 0 &&
-						newPlaylist?.map((playlist, idx) => (
+					{Array.isArray(playlists) &&
+						playlists.length > 0 &&
+						playlists?.map((playlist, idx) => (
 							<ListCont key={idx}>
 								<ListItem>
 									<Label>
 										<CheckBox
-											checked={isVideoIdExists(
-												playlist.videoIds,
-												videoId,
-											)}
-											onChange={(
-												e: React.ChangeEvent<HTMLInputElement>,
-											) => console.log(e.target.checked)}
+											name={playlist.name}
+											checked={isVideoIdExists(playlist.videoIds, videoId)}
+											onChange={handleChange}
 										/>
 										&nbsp;&nbsp;
 										{playlist.name}
