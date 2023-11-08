@@ -108,8 +108,8 @@ const VideoDetails = () => {
 			<VideoCont>
 				<VideoPlayer
 					src={`https://www.youtube.com/embed/${videoDetails.video.videoId}?autoplay=1`}
-					// allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					// allowFullScreen
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowFullScreen
 				/>
 				<Title>{videoDetails.video.title}</Title>
 				<Text>{videoDetails.video.creator}</Text>

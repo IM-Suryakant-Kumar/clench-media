@@ -120,7 +120,8 @@ export const RelatedVideoCont = styled.div`
         padding-bottom: 0;
     `}
 	@media (min-width: 800px) {
-		width: 30%;
+		width: 34%;
+        padding-right: 1.5em;
 		position: absolute;
 		right: 0;
 		top: -25.25em;
