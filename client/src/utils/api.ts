@@ -222,6 +222,17 @@ export const DeleteFromHistory = async (videoId: string) => {
 	}
 };
 
+export const getAllHistoryVideos = async () => {
+	try {
+		const { data } = await axios.get("/history");
+        return data
+	} catch (error) {
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
+	}
+};
+
 // PlayList API
 export const addToPlaylist = async (name: string, videoId: string) => {
 	try {
