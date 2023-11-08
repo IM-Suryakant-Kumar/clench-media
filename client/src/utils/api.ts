@@ -74,8 +74,7 @@ export const getAllVideos = async ({ request }: LoaderFunctionArgs) => {
 	try {
 		const { data } = await axios.get("/videos");
 		const cat: string = new URL(request.url).searchParams.get("cat") || "";
-		const search: string =
-			new URL(request.url).searchParams.get("search") || "";
+		const search: string = new URL(request.url).searchParams.get("search") || "";
 		// filterBYcategory
 		cat && (data.videos = filterByCategory(data.videos, cat));
 		// filterBySearch
@@ -125,6 +124,17 @@ export const deleteLike = async (videoId: string) => {
 	try {
 		const { data } = await axios.delete(`/like/${videoId}`);
 		return data;
+	} catch (error) {
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
+	}
+};
+
+export const getAllLikedVideos = async () => {
+	try {
+		const { data } = await axios.get("/like");
+        return data
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
 		console.log(newError.response.data);
@@ -204,11 +214,7 @@ export const DeleteFromHistory = async (videoId: string) => {
 // PlayList API
 export const addToPlaylist = async (name: string, videoId: string) => {
 	try {
-		const { data } = await axios.post(
-			"/playlist",
-			{ name, videoId },
-			config,
-		);
+		const { data } = await axios.post("/playlist", { name, videoId }, config);
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -219,11 +225,7 @@ export const addToPlaylist = async (name: string, videoId: string) => {
 
 export const deleteFromPlaylist = async (name: string, videoId: string) => {
 	try {
-		const { data } = await axios.put(
-			`/playlist`,
-			{ name, videoId },
-			config,
-		);
+		const { data } = await axios.put(`/playlist`, { name, videoId }, config);
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;

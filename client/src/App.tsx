@@ -12,6 +12,7 @@ import Login, { loader as loginLoader, action as loginAction } from "./pages/Log
 import Signup, { loader as signupLoader, action as signupAction } from "./pages/Signup";
 import HostLayout, { loader as hostLayoutLoader } from "./components/HostLayout";
 import VideoDetails, { loader as videoDetailsLoader } from "./pages/VideoDetails";
+import Like, { loader as likeLoader } from "./pages/Like";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -42,7 +43,8 @@ const router = createBrowserRouter(
 				/>
 				<Route
 					path="like"
-					element={<h1>Liked</h1>}
+					element={<Like />}
+					loader={likeLoader}
 				/>
 				<Route
 					path="playlists"
