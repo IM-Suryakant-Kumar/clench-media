@@ -11,8 +11,8 @@ export const EmptyCont = styled.div`
 export const EmptyWrapper = styled.div`
 	& > *:last-child {
 		display: inline-block;
-        background-color: #333;
-        color: white;
+        background-color: var(--play-btn-bg);
+        color: var(--primary-bg);
 		margin-top: 1em;
         padding: 0.625em 1.5em;
         font-size: medium;
