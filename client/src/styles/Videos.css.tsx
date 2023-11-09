@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { media } from "./Responsive.css";
 
 export const Container = styled.div`
-	padding: 0.2em 0.2em 6em 0.2em;
+	padding: 0.2em 0.625em 6em 0.625em;
 
 	${media.lg`
         padding-bottom: 1em;
@@ -10,13 +10,9 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
 	gap: 1em;
-	& > * {
-		flex: 1 1 300px;
-	}
 `;
 
 export const CatCont = styled.div`
@@ -28,7 +24,7 @@ export const CatCont = styled.div`
 		padding: 0.3125em 2em;
 		margin: 0.3125em;
 		border-radius: 0.3125em;
-        box-shadow: -0.1em 0.1em 0.3125em 0.1em #3333335c;
+		box-shadow: -0.1em 0.1em 0.3125em 0.1em #3333335c;
 	}
 	& > a.active,
 	& > a:hover {
