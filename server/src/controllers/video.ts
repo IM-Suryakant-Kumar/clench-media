@@ -31,10 +31,14 @@ export const getVideoDetails = async (req: Request, res: Response) => {
 		user: { _id },
 	} = req as IReq;
 	// Add to history
-	const history: { userId: string; videoId: string }[] = await History.find({ userId: _id });
-	const isAlreadyExists = history.includes({ userId: _id, videoId: id });
+	const isAlreadyExists: boolean = Boolean(
+		await History.findOne({
+			userId: _id,
+			videoId: id,
+		}),
+	);
 	isAlreadyExists
-		? await History.findByIdAndUpdate({ userId: _id, videoId: id })
+		? await History.findOneAndUpdate({ userId: _id, videoId: id }, { userId: _id, videoId: id })
 		: await History.create({ userId: _id, videoId: id });
 	// --------------
 	const videos = await Video.find();
