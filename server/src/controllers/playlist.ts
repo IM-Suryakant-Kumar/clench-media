@@ -88,7 +88,8 @@ export const getAllPlaylist = async (req: Request, res: Response) => {
 
 	const allPlaylist = playlist?.playlists.map((item) => ({
 		name: item.name,
-		videos: item.videoIds.map((videoId) => videos.find((v) => v.videoId === videoId)),
+		video: videos.find((v) => v.videoId === item.videoIds[0]),
+        numOfVideos: item.videoIds.length
 	}));
 
 	if (!allPlaylist) throw new NotFoundError("Videos not found!");

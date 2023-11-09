@@ -13,7 +13,6 @@ export const Wrapper = styled.div`
 `
 
 export const DeleteBtn = styled(MdDelete)`
-    color: var(--del-cl);
     position: absolute;
     top: 0;
     right: 0;

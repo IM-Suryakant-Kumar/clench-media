@@ -2,9 +2,7 @@ import { MdPlayArrow } from "react-icons/md";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import styled from "styled-components";
 
-export const Container = styled.div`
-	/* padding: ; */
-`;
+export const Container = styled.div``;
 
 export const CardCont = styled.div`
 	height: 80%;
@@ -45,12 +43,12 @@ export const PlayButton = styled(MdPlayArrow)`
 export const InfoCont = styled.div`
 	height: 20%;
 	padding: 0.25em 0 0.3125em 0.3125em;
-    position: relative;
+	position: relative;
 `;
 
 export const Title = styled.p`
 	font-size: medium;
-    padding-right: 1em;
+	padding-right: 1em;
 `;
 
 export const CreatorName = styled.span`
@@ -72,10 +70,10 @@ export const Time = styled.span`
 `;
 
 export const Dot = styled(PiDotsThreeVerticalBold)`
-    width: 1.5rem;
-    height: 1.5rem;
-    position: absolute;
-    top: 0.5em;
-    right: 0;
-    cursor: pointer;
+	width: 1.5rem;
+	height: 1.5rem;
+	position: absolute;
+	top: 0.5em;
+	right: 0;
+	cursor: pointer;
 `;

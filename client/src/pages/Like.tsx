@@ -26,7 +26,7 @@ const Like = () => {
 					<VideoCard
 						video={video}
 					/>
-                    <DeleteBtn size="2rem" onClick={() => handleClick(video.videoId)} />
+                    <DeleteBtn size="2rem" color="#ff607d" onClick={() => handleClick(video.videoId)} />
 				</Wrapper>
 			))}
 		</Container>
