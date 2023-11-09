@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import History from "../models/History";
 import { StatusCodes } from "http-status-codes";
 import Video from "../models/Video";
+import { NotFoundError } from "../errors";
 
 interface IReq extends Request {
 	body: {
@@ -44,6 +45,8 @@ export const getAllHistoryVideos = async (req: Request, res: Response) => {
 	const historyVideos = histories.map((history) =>
 		videos.find((v) => v.videoId === history.videoId),
 	);
+
+    if(!historyVideos) throw new NotFoundError("Videos not found!")
 
 	res.status(StatusCodes.OK).json({ success: true, historyVideos });
 };

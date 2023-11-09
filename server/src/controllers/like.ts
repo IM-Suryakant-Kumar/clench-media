@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Like from "../models/Like";
 import { StatusCodes } from "http-status-codes";
 import Video from "../models/Video";
+import { NotFoundError } from "../errors";
 
 interface IReq extends Request {
 	body: {
@@ -44,6 +45,8 @@ export const getAllLikedVideos = async (req: Request, res: Response) => {
     const videos = await Video.find()
 
     const likedVideos = likes.map(like => videos.find(v => v.videoId === like.videoId))
+    
+    if(!likedVideos) throw new NotFoundError("Videos not found!")
 
     res.status(StatusCodes.OK).json({ success: true, likedVideos })
 };

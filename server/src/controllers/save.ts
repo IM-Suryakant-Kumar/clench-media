@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import Save from "../models/Save";
 import Video from "../models/Video";
+import { NotFoundError } from "../errors";
 
 interface IReq extends Request {
 	body: {
@@ -46,6 +47,8 @@ export const getAllSavedVideos = async (req: Request, res: Response) => {
     const videos = await Video.find()
 
     const savedVideos = saves.map(save => videos.find(v => v.videoId === save.videoId))
+
+    if(!savedVideos) throw new NotFoundError("Videos not found!")
 
     res.status(StatusCodes.OK).json({ success: true, savedVideos })
 };

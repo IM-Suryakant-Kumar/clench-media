@@ -4,7 +4,7 @@ import { getAllPlaylist } from "../utils/api";
 export const loader = async () => {
 	const data = await getAllPlaylist();
 
-	return data.success && data.allPlaylist ? data.allPlaylist : null;
+	return data.success ? data.allPlaylist : null;
 };
 const Playlist = () => {
 	const allPlaylist = useLoaderData();

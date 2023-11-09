@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Playlist from "../models/Playlist";
 import { StatusCodes } from "http-status-codes";
 import Video from "../models/Video";
+import { NotFoundError } from "../errors";
 
 interface IBody {
 	name?: string;
@@ -89,6 +90,8 @@ export const getAllPlaylist = async (req: Request, res: Response) => {
 		name: item.name,
 		videos: item.videoIds.map((videoId) => videos.find((v) => v.videoId === videoId)),
 	}));
+
+	if (!allPlaylist) throw new NotFoundError("Videos not found!");
 
 	res.status(StatusCodes.OK).json({ success: true, allPlaylist });
 };
