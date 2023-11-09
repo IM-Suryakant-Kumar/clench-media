@@ -6,9 +6,17 @@ import Dislike from "../models/Dislike";
 import Save from "../models/Save";
 import History from "../models/History";
 import Playlist from "../models/Playlist";
+import { IVideo } from "../types/Video";
+
+interface IReq extends Request {
+	body: IVideo[] | IVideo;
+	params: { id: string };
+	user: { _id: string };
+}
 
 export const addVideo = async (req: Request, res: Response) => {
-	const videos = await Video.create(req.body);
+	const { body } = req as IReq;
+	const videos = await Video.create(body);
 	res.status(StatusCodes.OK).json({ success: true, videos });
 };
 
@@ -18,21 +26,30 @@ export const getVideos = async (req: Request, res: Response) => {
 };
 
 export const getVideoDetails = async (req: Request, res: Response) => {
-	const newReq: any = req;
-	await History.create({ userId: newReq.user._id, videoId: newReq.params.id });
+	const {
+		params: { id },
+		user: { _id },
+	} = req as IReq;
+	// Add to history
+	const history: { userId: string; videoId: string }[] = await History.find({ userId: _id });
+	const isAlreadyExists = history.includes({ userId: _id, videoId: id });
+	isAlreadyExists
+		? await History.findByIdAndUpdate({ userId: _id, videoId: id })
+		: await History.create({ userId: _id, videoId: id });
+	// --------------
 	const videos = await Video.find();
-	const video = videos.find((video) => video.videoId === newReq.params.id);
+	const video = videos.find((video) => video.videoId === id);
 	const relatedVideos = videos.filter(
-		(item) => item.categoryName === video?.categoryName && item.videoId !== newReq.params.id,
+		(item) => item.categoryName === video?.categoryName && item.videoId !== id,
 	);
 	// Actions
-	const isLiked = await Like.findOne({ userId: newReq.user._id, videoId: newReq.params.id });
+	const isLiked = await Like.findOne({ userId: _id, videoId: id });
 	const isDisliked = await Dislike.findOne({
-		userId: newReq.user._id,
-		videoId: newReq.params.id,
+		userId: _id,
+		videoId: id,
 	});
-	const isSaved = await Save.findOne({ userId: newReq.user._id, videoId: newReq.params.id });
-	const playlists = (await Playlist.findOne({ userId: newReq.user._id }))?.playlists;
+	const isSaved = await Save.findOne({ userId: _id, videoId: id });
+	const playlists = (await Playlist.findOne({ userId: _id }))?.playlists;
 	// const isInPlaylist = playlist?.playlists.find((item) => {
 	// 	return Boolean(item.videoIds.find((id) => id === newReq.params.id));
 	// });
