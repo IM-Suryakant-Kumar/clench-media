@@ -15,6 +15,7 @@ import VideoDetails, { loader as videoDetailsLoader } from "./pages/VideoDetails
 import Like, { loader as likeLoader } from "./pages/Like";
 import Playlist, { loader as playlistLoader } from "./pages/Playlist";
 import Save, { loader as saveLoader } from "./pages/Save";
+import History, { loader as historyLoader } from "./pages/History";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -60,7 +61,8 @@ const router = createBrowserRouter(
 				/>
 				<Route
 					path="history"
-					element={<h1>History</h1>}
+					element={<History />}
+                    loader={historyLoader}
 				/>
 			</Route>
 			<Route
