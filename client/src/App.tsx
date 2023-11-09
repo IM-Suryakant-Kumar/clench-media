@@ -16,6 +16,7 @@ import Like, { loader as likeLoader } from "./pages/Like";
 import Playlist, { loader as playlistLoader } from "./pages/Playlist";
 import Save, { loader as saveLoader } from "./pages/Save";
 import History, { loader as historyLoader } from "./pages/History";
+import PlaylistVideos, { loader as playlistVideosLoader } from "./pages/PlaylistVideos";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -52,17 +53,22 @@ const router = createBrowserRouter(
 				<Route
 					path="playlists"
 					element={<Playlist />}
-                    loader={playlistLoader}
+					loader={playlistLoader}
+				/>
+				<Route
+					path="playlists/:name"
+					element={<PlaylistVideos />}
+					loader={playlistVideosLoader}
 				/>
 				<Route
 					path="watchlater"
 					element={<Save />}
-                    loader={saveLoader}
+					loader={saveLoader}
 				/>
 				<Route
 					path="history"
 					element={<History />}
-                    loader={historyLoader}
+					loader={historyLoader}
 				/>
 			</Route>
 			<Route

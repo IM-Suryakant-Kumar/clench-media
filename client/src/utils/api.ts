@@ -134,7 +134,7 @@ export const deleteLike = async (videoId: string) => {
 export const getAllLikedVideos = async () => {
 	try {
 		const { data } = await axios.get("/like");
-        return data
+		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
 		console.log(newError.response.data);
@@ -191,7 +191,7 @@ export const deleteFromSave = async (videoId: string) => {
 export const getAllSavedVideos = async () => {
 	try {
 		const { data } = await axios.get("/save");
-        return data
+		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
 		console.log(newError.response.data);
@@ -225,7 +225,7 @@ export const DeleteFromHistory = async (videoId: string) => {
 export const getAllHistoryVideos = async () => {
 	try {
 		const { data } = await axios.get("/history");
-        return data
+		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
 		console.log(newError.response.data);
@@ -259,7 +259,18 @@ export const deleteFromPlaylist = async (name: string, videoId: string) => {
 export const getAllPlaylist = async () => {
 	try {
 		const { data } = await axios.get("/playlist");
-        return data
+		return data;
+	} catch (error) {
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
+	}
+};
+
+export const getPlaylistVideos = async (name: string) => {
+	try {
+		const { data } = await axios.get(`/playlist/${name}`);
+		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
 		console.log(newError.response.data);

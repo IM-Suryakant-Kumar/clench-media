@@ -16,6 +16,7 @@ interface IUser {
 interface IReq extends Request {
 	body: IBody;
 	user: IUser;
+    params: { name: string }
 }
 
 export const addToPlaylist = async (req: Request, res: Response) => {
@@ -89,10 +90,26 @@ export const getAllPlaylist = async (req: Request, res: Response) => {
 	const allPlaylist = playlist?.playlists.map((item) => ({
 		name: item.name,
 		video: videos.find((v) => v.videoId === item.videoIds[0]),
-        numOfVideos: item.videoIds.length
+		numOfVideos: item.videoIds.length,
 	}));
 
 	if (!allPlaylist) throw new NotFoundError("Videos not found!");
 
 	res.status(StatusCodes.OK).json({ success: true, allPlaylist });
+};
+
+export const getPlaylistVideos = async (req: Request, res: Response) => {
+	const {
+		user: { _id },
+		params: { name },
+	} = req as IReq;
+
+	const playlists = await Playlist.findOne({ userId: _id });
+	const videos = await Video.find();
+	const playlistVideos = playlists?.playlists
+		.find((p) => p.name === name)
+		?.videoIds.map((videoId) => videos.find((v) => v.videoId === videoId));
+
+	if (!playlistVideos) throw new NotFoundError("Videos not found!");
+	res.status(StatusCodes.OK).json({ success: true, playlistVideos });
 };
