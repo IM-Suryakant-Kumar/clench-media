@@ -14,6 +14,7 @@ import HostLayout, { loader as hostLayoutLoader } from "./components/HostLayout"
 import VideoDetails, { loader as videoDetailsLoader } from "./pages/VideoDetails";
 import Like, { loader as likeLoader } from "./pages/Like";
 import Playlist, { loader as playlistLoader } from "./pages/Playlist";
+import Save, { loader as saveLoader } from "./pages/Save";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -54,7 +55,8 @@ const router = createBrowserRouter(
 				/>
 				<Route
 					path="watchlater"
-					element={<h1>watch later</h1>}
+					element={<Save />}
+                    loader={saveLoader}
 				/>
 				<Route
 					path="history"

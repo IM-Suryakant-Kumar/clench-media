@@ -8,8 +8,8 @@ export const loader = async () => {
 };
 const Playlist = () => {
 	const allPlaylist = useLoaderData();
-
 	console.log(allPlaylist);
+    
 	return <div>Playlist</div>;
 };
 
