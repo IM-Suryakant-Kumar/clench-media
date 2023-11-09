@@ -21,7 +21,7 @@ const History = () => {
 
 	return (
 		<Container>
-			{videos.map((video, idx) => (
+			{Array.isArray(videos) && videos.map((video, idx) => (
 				<Wrapper key={idx}>
 					<VideoCard video={video} />
 					<DeleteBtn
