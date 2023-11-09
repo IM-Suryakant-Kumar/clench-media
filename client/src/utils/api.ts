@@ -277,3 +277,14 @@ export const getPlaylistVideos = async (name: string) => {
 		return newError.response.data;
 	}
 };
+
+export const deletePlaylist = async (name: string) => {
+	try {
+		const { data } = await axios.patch(`/playlist/${name}`);
+		return data;
+	} catch (error) {
+		const newError: IApiError = error as IApiError;
+		console.log(newError.response.data);
+		return newError.response.data;
+	}
+};
