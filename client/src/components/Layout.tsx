@@ -1,4 +1,4 @@
-import { Outlet, redirect, useLoaderData, useNavigation } from "react-router-dom";
+import { Outlet, useLoaderData, useNavigation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getLoggedInUser } from "../utils/api";
