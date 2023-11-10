@@ -7,7 +7,7 @@ const router: Router = Router();
 router.route("/").get(test);
 router.route("/register").post(createUser);
 router.route("/login").post(login);
-router.route("/guest-login").post(guestLogin);
-router.route("/logout").post(authenticateUser, logout);
+router.route("/guest-login").get(guestLogin);
+router.route("/logout").get(authenticateUser, logout);
 
 export default router;

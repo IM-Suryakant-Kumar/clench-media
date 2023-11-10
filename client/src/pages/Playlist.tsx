@@ -15,12 +15,15 @@ interface Playlist {
 
 export const loader = async () => {
 	const data = await getAllPlaylist();
+	console.log(data);
 	return data.success ? data.allPlaylist : null;
 };
 
 const Playlist = () => {
 	const allPlaylist = useLoaderData() as Playlist[];
-	const [playlists, setPlaylists] = useState<Playlist[]>(allPlaylist);
+	const filteredPlaylists = allPlaylist.filter((item) => item.numOfVideos !== 0);
+
+	const [playlists, setPlaylists] = useState<Playlist[]>(filteredPlaylists);
 
 	const handleClick = async (name: string) => {
 		const data = await deletePlaylist(name);

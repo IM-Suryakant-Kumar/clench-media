@@ -18,10 +18,10 @@ export const sendToken = (user: IUser, statusCode: number, res: Response) => {
 		.cookie("token", token, {
 			maxAge: COOKIE_LIFETIME * 24 * 60 * 60 * 1000,
 			httpOnly: true,
-            secure: true
 		})
 		.json({
 			success: true,
 			message: "logged in successfully",
+			token: token,
 		});
 };

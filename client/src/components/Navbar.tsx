@@ -33,6 +33,8 @@ const Navbar: React.FC<Props> = ({ user, setUser }) => {
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
 
+    // console.log(user)
+
 	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		navigate(`/host/videos?search=${searchText}`);

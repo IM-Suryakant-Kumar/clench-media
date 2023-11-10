@@ -17,9 +17,14 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const errors_1 = require("../errors");
 const User_1 = __importDefault(require("../models/User"));
 const authenticateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { token } = req.cookies;
-    if (!token)
-        throw new errors_1.UnauthenticatedError("Authentication failed!");
+    // const { token } = req.cookies;
+    // check header
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer"))
+        throw new errors_1.UnauthenticatedError("Authentication Invalid!");
+    const token = authHeader.split(" ")[1];
+    if (token === "null")
+        throw new errors_1.UnauthenticatedError("Authentication Invalid!");
     const JWT_SECRET = process.env.JWT_SECRET || "something";
     const verifiedData = jsonwebtoken_1.default.verify(token, JWT_SECRET);
     const newReq = req;

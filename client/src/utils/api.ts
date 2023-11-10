@@ -1,16 +1,27 @@
 import axios from "./axios";
-import { ILUser, IRUser } from "../types/user";
+import { ILUser, IRUser, User } from "../types/user";
 import { toast } from "react-toastify";
 import { LoaderFunctionArgs } from "react-router-dom";
 import { filterByCategory, filterBySearch } from "./filter";
 import IApiError from "../types/apiError";
+import {
+	addTokenToLocalStorage,
+	getTokenFromLocalStorage,
+	removeTokenFromLocalStorage,
+} from "./manageToken";
 
-const config = { headers: { Content_Type: "application/json" } };
+export interface IAuthRes {
+	success: boolean;
+	message: string;
+	token: string;
+	user: User;
+}
 
 // User API
 export const register = async (user: IRUser) => {
 	try {
-		const { data } = await axios.post("/register", user, config);
+		const { data } = await axios.post("/register", user);
+		addTokenToLocalStorage(data.token);
 		toast.success("Registered Successfully!");
 		return data;
 	} catch (error) {
@@ -22,7 +33,8 @@ export const register = async (user: IRUser) => {
 
 export const login = async (user: ILUser) => {
 	try {
-		const { data } = await axios.post("/login", user, config);
+		const { data } = await axios.post("/login", user);
+		addTokenToLocalStorage(data.token);
 		toast.success(data.message);
 		return data;
 	} catch (error) {
@@ -34,10 +46,10 @@ export const login = async (user: ILUser) => {
 
 export const guestLogin = async () => {
 	try {
-		const {
-			data: { message },
-		} = await axios.post("/guest-login", {}, config);
-		toast.success(message);
+		const { data } = await axios.get("/guest-login");
+		addTokenToLocalStorage(data.token);
+		toast.success(data.message);
+		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
 		console.log(newError.response.data);
@@ -47,9 +59,10 @@ export const guestLogin = async () => {
 
 export const logout = async () => {
 	try {
+		removeTokenFromLocalStorage();
 		const {
 			data: { message },
-		} = await axios.post("/logout", {}, config);
+		} = await axios.get("/logout");
 		toast.success(message);
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -60,7 +73,12 @@ export const logout = async () => {
 
 export const getLoggedInUser = async () => {
 	try {
-		return (await axios.get("/me")).data;
+		// set header for new token
+		const { data } = await axios.get("/me", {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
+		console.log(data);
+		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
 		console.log(newError.response.data);
@@ -99,7 +117,9 @@ export const getCategories = async () => {
 
 export const getVideoDetails = async ({ params }: LoaderFunctionArgs) => {
 	try {
-		const { data } = await axios.get(`/videos/${params.id}`);
+		const { data } = await axios.get(`/videos/${params.id}`, {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -111,7 +131,13 @@ export const getVideoDetails = async ({ params }: LoaderFunctionArgs) => {
 // Like API
 export const createLike = async (videoId: string) => {
 	try {
-		const { data } = await axios.post("/like", { videoId }, config);
+		const { data } = await axios.post(
+			"/like",
+			{ videoId },
+			{
+				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+			},
+		);
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -122,7 +148,9 @@ export const createLike = async (videoId: string) => {
 
 export const deleteLike = async (videoId: string) => {
 	try {
-		const { data } = await axios.delete(`/like/${videoId}`);
+		const { data } = await axios.delete(`/like/${videoId}`, {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -133,7 +161,10 @@ export const deleteLike = async (videoId: string) => {
 
 export const getAllLikedVideos = async () => {
 	try {
-		const { data } = await axios.get("/like");
+		const { data } = await axios.get("/like", {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
+		console.log(data);
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -145,7 +176,13 @@ export const getAllLikedVideos = async () => {
 // Dislike API
 export const createDislike = async (videoId: string) => {
 	try {
-		const { data } = await axios.post("/dislike", { videoId }, config);
+		const { data } = await axios.post(
+			"/dislike",
+			{ videoId },
+			{
+				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+			},
+		);
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -156,7 +193,9 @@ export const createDislike = async (videoId: string) => {
 
 export const deleteDislike = async (videoId: string) => {
 	try {
-		const { data } = await axios.delete(`/dislike/${videoId}`);
+		const { data } = await axios.delete(`/dislike/${videoId}`, {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -168,7 +207,13 @@ export const deleteDislike = async (videoId: string) => {
 // Save API
 export const addToSave = async (videoId: string) => {
 	try {
-		const { data } = await axios.post("/save", { videoId }, config);
+		const { data } = await axios.post(
+			"/save",
+			{ videoId },
+			{
+				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+			},
+		);
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -179,7 +224,9 @@ export const addToSave = async (videoId: string) => {
 
 export const deleteFromSave = async (videoId: string) => {
 	try {
-		const { data } = await axios.delete(`/save/${videoId}`);
+		const { data } = await axios.delete(`/save/${videoId}`, {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -190,7 +237,9 @@ export const deleteFromSave = async (videoId: string) => {
 
 export const getAllSavedVideos = async () => {
 	try {
-		const { data } = await axios.get("/save");
+		const { data } = await axios.get("/save", {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -202,7 +251,13 @@ export const getAllSavedVideos = async () => {
 // History API
 export const AddToHistory = async (videoId: string) => {
 	try {
-		const { data } = await axios.post("/history", { videoId }, config);
+		const { data } = await axios.post(
+			"/history",
+			{ videoId },
+			{
+				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+			},
+		);
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -213,7 +268,9 @@ export const AddToHistory = async (videoId: string) => {
 
 export const DeleteFromHistory = async (videoId: string) => {
 	try {
-		const { data } = await axios.delete(`/history/${videoId}`);
+		const { data } = await axios.delete(`/history/${videoId}`, {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -224,7 +281,9 @@ export const DeleteFromHistory = async (videoId: string) => {
 
 export const getAllHistoryVideos = async () => {
 	try {
-		const { data } = await axios.get("/history");
+		const { data } = await axios.get("/history", {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -236,7 +295,13 @@ export const getAllHistoryVideos = async () => {
 // PlayList API
 export const addToPlaylist = async (name: string, videoId: string) => {
 	try {
-		const { data } = await axios.post("/playlist", { name, videoId }, config);
+		const { data } = await axios.post(
+			"/playlist",
+			{ name, videoId },
+			{
+				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+			},
+		);
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -247,7 +312,13 @@ export const addToPlaylist = async (name: string, videoId: string) => {
 
 export const deleteFromPlaylist = async (name: string, videoId: string) => {
 	try {
-		const { data } = await axios.put(`/playlist`, { name, videoId }, config);
+		const { data } = await axios.put(
+			`/playlist`,
+			{ name, videoId },
+			{
+				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+			},
+		);
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -258,7 +329,9 @@ export const deleteFromPlaylist = async (name: string, videoId: string) => {
 
 export const getAllPlaylist = async () => {
 	try {
-		const { data } = await axios.get("/playlist");
+		const { data } = await axios.get("/playlist", {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -269,7 +342,9 @@ export const getAllPlaylist = async () => {
 
 export const getPlaylistVideos = async (name: string) => {
 	try {
-		const { data } = await axios.get(`/playlist/${name}`);
+		const { data } = await axios.get(`/playlist/${name}`, {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -280,7 +355,9 @@ export const getPlaylistVideos = async (name: string) => {
 
 export const deletePlaylist = async (name: string) => {
 	try {
-		const { data } = await axios.patch(`/playlist/${name}`);
+		const { data } = await axios.patch(`/playlist/${name}`, {
+			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+		});
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;

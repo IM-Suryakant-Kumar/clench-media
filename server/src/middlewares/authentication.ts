@@ -3,10 +3,19 @@ import jwt from "jsonwebtoken";
 import { UnauthenticatedError } from "../errors";
 import User from "../models/User";
 
-export const authenticateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-	const { token } = req.cookies;
+export const authenticateUser = async (
+	req: Request,
+	res: Response,
+	next: NextFunction,
+): Promise<void> => {
+	// const { token } = req.cookies;
+	// check header
+	const authHeader = req.headers.authorization;
+	if (!authHeader || !authHeader.startsWith("Bearer"))
+		throw new UnauthenticatedError("Authentication Invalid!");
 
-	if (!token) throw new UnauthenticatedError("Authentication failed!");
+	const token = authHeader.split(" ")[1];
+	if (token === "null") throw new UnauthenticatedError("Authentication Invalid!");
 
 	const JWT_SECRET = process.env.JWT_SECRET || "something";
 	const verifiedData: any = jwt.verify(token, JWT_SECRET);
