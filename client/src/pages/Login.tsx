@@ -53,7 +53,7 @@ const Login = () => {
 	const handleGuestLogin = async () => {
 		await guestLogin();
 		const { user } = await getLoggedInUser();
-        console.log(user)
+        // console.log(user)
 		setUser(user);
 		navigate(pathname);
 	};
