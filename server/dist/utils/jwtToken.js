@@ -15,10 +15,8 @@ const sendToken = (user, statusCode, res) => {
     const COOKIE_LIFETIME = Number(process.env.COOKIE_LIFETIME) || 5;
     res.status(statusCode)
         .cookie("token", token, {
-        expires: new Date(Date.now() + COOKIE_LIFETIME * 24 * 60 * 60 * 1000),
-        secure: true,
+        maxAge: COOKIE_LIFETIME * 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: "none",
     })
         .json({
         success: true,
