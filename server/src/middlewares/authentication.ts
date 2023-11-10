@@ -6,7 +6,6 @@ import User from "../models/User";
 export const authenticateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 	const { token } = req.cookies;
 
-
 	if (!token) throw new UnauthenticatedError("Authentication failed!");
 
 	const JWT_SECRET = process.env.JWT_SECRET || "something";

@@ -17,6 +17,7 @@ const sendToken = (user, statusCode, res) => {
         .cookie("token", token, {
         maxAge: COOKIE_LIFETIME * 24 * 60 * 60 * 1000,
         httpOnly: true,
+        secure: true
     })
         .json({
         success: true,

@@ -36,7 +36,7 @@ export const guestLogin = async () => {
 	try {
 		const {
 			data: { message },
-		} = await axios.get("/guest-login");
+		} = await axios.post("/guest-login", {}, config);
 		toast.success(message);
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
@@ -49,7 +49,7 @@ export const logout = async () => {
 	try {
 		const {
 			data: { message },
-		} = await axios.get("/logout");
+		} = await axios.post("/logout", {}, config);
 		toast.success(message);
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
