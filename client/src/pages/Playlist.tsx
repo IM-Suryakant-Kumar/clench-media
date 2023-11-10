@@ -15,7 +15,7 @@ interface Playlist {
 
 export const loader = async () => {
 	const data = await getAllPlaylist();
-	console.log(data);
+	// console.log(data);
 	return data.success ? data.allPlaylist : null;
 };
 

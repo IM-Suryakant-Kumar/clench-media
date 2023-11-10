@@ -77,7 +77,7 @@ export const getLoggedInUser = async () => {
 		const { data } = await axios.get("/me", {
 			headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
 		});
-		console.log(data);
+		// console.log(data);
 		return data;
 	} catch (error) {
 		const newError: IApiError = error as IApiError;
