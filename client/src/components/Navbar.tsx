@@ -55,7 +55,6 @@ const Navbar: React.FC<Props> = ({ user, setUser }) => {
 		}
 	};
 
-	/* eslint-disable react-hooks/exhaustive-deps */
 	const debounceChangeHandler = useMemo(
 		() => debounce(changeHandler, 1000),
 		[searchText],
