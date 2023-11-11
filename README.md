@@ -4,7 +4,7 @@ A Video library app made using mern stack with TypeScript
 
 ## Demo
 
-https://github.com/IM-Suryakant-Kumar/ClenchMedia/assets/66691162/8f7e6ed5-ec98-405c-8e2a-8eccaaa428aa
+https://github.com/IM-Suryakant-Kumar/ClenchMedia/assets/66691162/57a6ebbc-b514-4dbf-8a98-428e276e67f0
 
 ## Features
 
