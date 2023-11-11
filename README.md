@@ -12,6 +12,7 @@ https://github.com/IM-Suryakant-Kumar/ClenchMedia/assets/66691162/57a6ebbc-b514-
 -   User Authentication
 -   Protected and Public route
 -   Search implementation with debounce
+-   Filter by category
 -   Video listing page
 -   Single video page
 -   Like, Dislike, Watch later management on single video
