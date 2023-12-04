@@ -1,10 +1,10 @@
+<div align="center">
+
 # ClenchMedia
 
 A Video library app made using mern stack with TypeScript
 
-## Demo
-
-https://github.com/IM-Suryakant-Kumar/ClenchMedia/assets/66691162/57a6ebbc-b514-4dbf-8a98-428e276e67f0
+</div>
 
 ## Features
 
@@ -28,3 +28,8 @@ https://github.com/IM-Suryakant-Kumar/ClenchMedia/assets/66691162/57a6ebbc-b514-
 -   MongoDB, Express, Mongoose, Node for backend
 -   JWT for authentication
 -   bcryptjs for password hashing
+
+
+## Demo
+
+https://github.com/IM-Suryakant-Kumar/ClenchMedia/assets/66691162/57a6ebbc-b514-4dbf-8a98-428e276e67f0
