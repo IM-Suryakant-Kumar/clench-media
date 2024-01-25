@@ -6,16 +6,20 @@ import User from "../models/User";
 export const authenticateUser = async (
 	req: Request,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ): Promise<void> => {
-	// const { token } = req.cookies;
-	// check header
-	const authHeader = req.headers.authorization;
-	if (!authHeader || !authHeader.startsWith("Bearer"))
-		throw new UnauthenticatedError("Authentication Invalid!");
+	let { token } = req.cookies;
 
-	const token = authHeader.split(" ")[1];
-	if (token === "null") throw new UnauthenticatedError("Authentication Invalid!");
+	if (!token || token === "undefined") {
+    // check header
+		const authHeader = req.headers.authorization;
+		if (!authHeader || !authHeader.startsWith("Bearer"))
+			throw new UnauthenticatedError("Authentication Invalid!");
+		token = authHeader.split(" ")[1];
+	}
+
+	if (!token || token === "null" || token === "undefined")
+		throw new UnauthenticatedError("Authentication Invalid!");
 
 	const JWT_SECRET = process.env.JWT_SECRET || "something";
 	const verifiedData: any = jwt.verify(token, JWT_SECRET);
