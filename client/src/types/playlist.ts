@@ -3,6 +3,6 @@ export interface IPlaylist {
 	videoIds: string[];
 }
 
-export default interface IPlaylists {
+export interface IPlaylists {
     playlists: IPlaylist[]
 }

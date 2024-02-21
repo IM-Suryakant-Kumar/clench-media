@@ -1,6 +1,6 @@
-import IPlaylists from "./playlist";
+import { IPlaylists } from ".";
 
-export default interface IVideo {
+export interface IVideo {
 	videoId: string;
 	title: string;
 	description: string;

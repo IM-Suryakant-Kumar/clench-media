@@ -1,14 +1,7 @@
-import axios from "./axios";
-import { ILUser, IRUser, User } from "../types/user";
-import { toast } from "react-toastify";
 import { LoaderFunctionArgs } from "react-router-dom";
-import { filterByCategory, filterBySearch } from "./filter";
-import IApiError from "../types/apiError";
-import {
-	addTokenToLocalStorage,
-	getTokenFromLocalStorage,
-	removeTokenFromLocalStorage,
-} from "./manageToken";
+import { toast } from "react-toastify";
+import { IApiError, ILUser, IRUser, User } from "../types";
+import { addTokenToLocalStorage, instance as axios, filterByCategory, filterBySearch, getTokenFromLocalStorage, removeTokenFromLocalStorage } from ".";
 
 export interface IAuthRes {
 	success: boolean;
@@ -92,7 +85,8 @@ export const getAllVideos = async ({ request }: LoaderFunctionArgs) => {
 	try {
 		const { data } = await axios.get("/videos");
 		const cat: string = new URL(request.url).searchParams.get("cat") || "";
-		const search: string = new URL(request.url).searchParams.get("search") || "";
+		const search: string =
+			new URL(request.url).searchParams.get("search") || "";
 		// filterBYcategory
 		cat && (data.videos = filterByCategory(data.videos, cat));
 		// filterBySearch
@@ -136,7 +130,7 @@ export const createLike = async (videoId: string) => {
 			{ videoId },
 			{
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
-			},
+			}
 		);
 		return data;
 	} catch (error) {
@@ -181,7 +175,7 @@ export const createDislike = async (videoId: string) => {
 			{ videoId },
 			{
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
-			},
+			}
 		);
 		return data;
 	} catch (error) {
@@ -212,7 +206,7 @@ export const addToSave = async (videoId: string) => {
 			{ videoId },
 			{
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
-			},
+			}
 		);
 		return data;
 	} catch (error) {
@@ -256,7 +250,7 @@ export const AddToHistory = async (videoId: string) => {
 			{ videoId },
 			{
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
-			},
+			}
 		);
 		return data;
 	} catch (error) {
@@ -300,7 +294,7 @@ export const addToPlaylist = async (name: string, videoId: string) => {
 			{ name, videoId },
 			{
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
-			},
+			}
 		);
 		return data;
 	} catch (error) {
@@ -317,7 +311,7 @@ export const deleteFromPlaylist = async (name: string, videoId: string) => {
 			{ name, videoId },
 			{
 				headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
-			},
+			}
 		);
 		return data;
 	} catch (error) {
