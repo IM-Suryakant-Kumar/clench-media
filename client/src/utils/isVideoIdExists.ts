@@ -1,5 +1,3 @@
-const isVideoIdExists = (videoIds: string[], videoId: string) => {
+export const isVideoIdExists = (videoIds: string[], videoId: string) => {
 	return videoIds.includes(videoId);
 };
-
-export default isVideoIdExists;

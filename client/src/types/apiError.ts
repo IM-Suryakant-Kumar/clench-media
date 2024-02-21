@@ -1,4 +1,4 @@
-export default interface IApiError {
+export interface IApiError {
 	message: string;
 	response: {
 		data: {

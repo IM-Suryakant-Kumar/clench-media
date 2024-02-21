@@ -1,7 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap");
-@import "./styles/variables.css";
+
+:root {
+	--primary-color: #3a86ff;
+	--primary-bg: #f6fff8;
+	--secondary-cl: #bde0fe;
+	--search-bg: #edf6f9;
+	--input-cl: #0d1b2a;
+	--icon-color: #124559;
+	--hover-icon-bg: #124559;
+	--white-cl: #faf1f1;
+	--grey-cl: #415a77;
+	--btn-bg: #004e89;
+	--btn-cl: #cae9ff;
+	--border-cl: #cddafd;
+	--link-cl: #0496ff;
+	--form-head-cl: #0496ff;
+	--login-bg: #133c55;
+	--guest-bg: #0e6ba8;
+	--side-icon-cl: #4bff14;
+	--active-cl: #f260ff;
+	--duration-bg: #3a85ffbb;
+	--play-btn-bg: #3a85fff3;
+}
 
 *,
 *::after,

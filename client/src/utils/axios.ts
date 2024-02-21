@@ -1,10 +1,9 @@
 import axios from "axios";
-import { getTokenFromLocalStorage } from "./manageToken";
+import { getTokenFromLocalStorage } from ".";
 
 const baseURL: string = import.meta.env.VITE_BASE_URL;
 
-
-const instance = axios.create({
+export const instance = axios.create({
 	baseURL,
 	withCredentials: true,
 	headers: {
@@ -12,5 +11,3 @@ const instance = axios.create({
 		Authorization: `Bearer ${getTokenFromLocalStorage()}`,
 	},
 });
-
-export default instance;
