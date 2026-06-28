@@ -1,5 +1,5 @@
 import "express-async-errors";
-import { config } from "dotenv";
+import "dotenv/config";
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
@@ -17,7 +17,6 @@ import historyRouter from "./routes/history"
 import cookieParser from "cookie-parser";
 import { authenticateUser } from "./middlewares/authentication";
 
-config();
 const app: Application = express();
 
 // middleware
@@ -50,12 +49,13 @@ app.use(errorHandlerMiddleware);
 
 const PORT: string | number = process.env.PORT || 4000;
 const MONGO_URL = process.env.MONGO_URL || "MONGO_URL";
-const start = async () => {
+(async () => {
 	try {
 		await connectDB(MONGO_URL);
-		app.listen(PORT, () => console.log(`Server is listening on port ${PORT}...`));
+		app.listen(PORT, () => console.log(`Server is listening on port http://localhost:${PORT}`));
 	} catch (error) {
 		console.log(error);
 	}
-};
-start();
+})();
+
+export default app;
