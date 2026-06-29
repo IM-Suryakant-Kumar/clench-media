@@ -6,17 +6,9 @@ import User from "../models/User";
 export const authenticateUser = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ): Promise<void> => {
-	let { token } = req.cookies;
-
-	if (!token || token === "undefined") {
-    // check header
-		const authHeader = req.headers.authorization;
-		if (!authHeader || !authHeader.startsWith("Bearer"))
-			throw new UnauthenticatedError("Authentication Invalid!");
-		token = authHeader.split(" ")[1];
-	}
+	const token = req.headers.authorization?.split(" ")[1];
 
 	if (!token || token === "null" || token === "undefined")
 		throw new UnauthenticatedError("Authentication Invalid!");
