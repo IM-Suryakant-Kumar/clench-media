@@ -8,13 +8,12 @@ import { errorHandlerMiddleware, notFoundMiddleware } from "./middlewares";
 import connectDB from "./db";
 import authRouter from "./routes/auth";
 import userRouter from "./routes/user";
-import videoRouter from "./routes/video"
-import likeRouter from "./routes/like"
-import dislikeRouter from "./routes/dislike"
-import saveRouter from "./routes/save"
-import playlistRouter from "./routes/playlist"
-import historyRouter from "./routes/history"
-import cookieParser from "cookie-parser";
+import videoRouter from "./routes/video";
+import likeRouter from "./routes/like";
+import dislikeRouter from "./routes/dislike";
+import saveRouter from "./routes/save";
+import playlistRouter from "./routes/playlist";
+import historyRouter from "./routes/history";
 import { authenticateUser } from "./middlewares/authentication";
 
 const app: Application = express();
@@ -22,16 +21,9 @@ const app: Application = express();
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser())
 app.use(helmet());
 app.use(morgan("tiny"));
-app.use(
-	cors({
-		origin: process.env.CLIENT_URL,
-		credentials: true,
-		optionsSuccessStatus: 200,
-	}),
-);
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 
 // Router
 app.use(authRouter);
@@ -52,7 +44,9 @@ const MONGO_URL = process.env.MONGO_URL || "MONGO_URL";
 (async () => {
 	try {
 		await connectDB(MONGO_URL);
-		app.listen(PORT, () => console.log(`Server is listening on port http://localhost:${PORT}`));
+		app.listen(PORT, () =>
+			console.log(`Server is listening on port http://localhost:${PORT}`),
+		);
 	} catch (error) {
 		console.log(error);
 	}

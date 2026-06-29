@@ -11,13 +11,18 @@ export const test = async (req: Request, res: Response) => {
 };
 
 // create user
-export const createUser = async (req: Request, res: Response): Promise<void> => {
+export const createUser = async (
+	req: Request,
+	res: Response,
+): Promise<void> => {
 	const { name, email, password } = req.body;
 
-	if (!(name && email && password)) throw new BadRequestError("Please provide all values");
+	if (!(name && email && password))
+		throw new BadRequestError("Please provide all values");
 
 	const emailAlreadyExists = await User.findOne({ email });
-	if (emailAlreadyExists) throw new UnauthenticatedError("Email is already exists");
+	if (emailAlreadyExists)
+		throw new UnauthenticatedError("Email is already exists");
 
 	const user = await User.create({ name, email, password });
 
@@ -28,34 +33,37 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
 export const login = async (req: Request, res: Response): Promise<void> => {
 	const { email, password } = req.body;
 
-	if (!(email && password)) throw new BadRequestError("Please provide all values");
+	if (!(email && password))
+		throw new BadRequestError("Please provide all values");
 
 	const user = await User.findOne({ email });
 	if (!user) throw new UnauthenticatedError("Invalid credentials!");
 
 	const isPasswordCorrect = await bcrypt.compare(password, user.password);
-	if (!isPasswordCorrect) throw new UnauthenticatedError("Invalid credentials!");
+	if (!isPasswordCorrect)
+		throw new UnauthenticatedError("Invalid credentials!");
 
 	sendToken(user, StatusCodes.OK, res);
 };
 
 // guest login
-export const guestLogin = async (req: Request, res: Response): Promise<void> => {
-
+export const guestLogin = async (
+	req: Request,
+	res: Response,
+): Promise<void> => {
 	const user = await User.findOne({ email: "clench@gmail.com" });
 	if (!user) throw new UnauthenticatedError("Invalid credentials!");
 
 	const isPasswordCorrect = await bcrypt.compare("secret", user.password);
-	if (!isPasswordCorrect) throw new UnauthenticatedError("Invalid credentials!");
+	if (!isPasswordCorrect)
+		throw new UnauthenticatedError("Invalid credentials!");
 
 	sendToken(user, StatusCodes.OK, res);
 };
 
 // logout user
 export const logout = async (req: Request, res: Response): Promise<void> => {
-	res.cookie("token", null, {
-		expires: new Date(Date.now()),
-	});
-
-	res.status(StatusCodes.OK).json({ success: true, message: "Logged out successflly!" });
+	res
+		.status(StatusCodes.OK)
+		.json({ success: true, message: "Logged out successflly!" });
 };

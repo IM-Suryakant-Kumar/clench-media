@@ -13,15 +13,9 @@ export const sendToken = (user: IUser, statusCode: number, res: Response) => {
 
 	const COOKIE_LIFETIME: number = Number(process.env.COOKIE_LIFETIME) || 5;
 
-	res
-		.status(statusCode)
-		.cookie("token", token, {
-			maxAge: COOKIE_LIFETIME * 24 * 60 * 60 * 1000,
-			httpOnly: true,
-		})
-		.json({
-			success: true,
-			message: "logged in successfully",
-			token: token,
-		});
+	res.status(statusCode).json({
+		success: true,
+		message: "logged in successfully",
+		token: token,
+	});
 };
